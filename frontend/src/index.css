@@ -1,13 +1,33 @@
-body {
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'DM Sans', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.light-theme {
+    --primary-color: #1e2734;
+    --primary-light: #9a70f4;
+    --primary-lightest: #E4D9FC;
+    --primary-dark: #6b2df0;
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --warning-color: red;
+    --para-color: #566474;
+    --input-color: #1e272e;
+    --input-border: #ebf0f5;
+    --input-hover: #d7e1ea;
+    --input-focus: #7840f2;
+    --background-secondary: #f7f7f7;
+    --background-secondary-hover: #E6EAEF;
+    --create-btn: #1e2734;
+    --create-btn-hover: #253141;
+    --header-bg: #fff;
+    --info-color-light: #616D7A;
+    --info-color-dark: #68798D;
+    --menu-link: #3f4358;
+    --primary-background: #cbb4f8;
 }
