@@ -9,6 +9,7 @@ import F4 from "../images/features/f4.png";
 import F5 from "../images/features/f5.png";
 import F6 from "../images/features/f6.png";
 import ProductSection from "../components/jsx/ProductSection";
+import Footer from "../components/jsx/Footer";
 
 const features = [
   {
@@ -55,6 +56,7 @@ const Home = () => {
       </div>
 
       <ProductSection />
+      <Footer />
     </div>
   );
 };
