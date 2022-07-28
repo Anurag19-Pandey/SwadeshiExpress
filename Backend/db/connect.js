@@ -2,10 +2,16 @@ const mongoose = require("mongoose")
 
 Mongo_Uri ="mongodb://localhost:27017/SwadeshiExpress"
 
-const databaseconnnect=()=>{
-    mongoose.connect(Mongo_Uri,()=>{
-        console.log("Connected to Database");
-    })
-}
+mongoose.connect(Mongo_Uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
 
-module.exports = databaseconnnect
+const db = mongoose.connection;
+
+db.on("error",console.error.bind(console,"Error in connecting Database!"))
+db.once("open",()=>{
+    console.log("Database Connected")
+})
+
+module.exports = db
