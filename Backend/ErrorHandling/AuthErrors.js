@@ -35,5 +35,10 @@ module.exports.AuthError = (err)=>{
         errors.password = "Password should be greater than 6 characters"
         return errors
     }
+    if(err.message === "Seller Not Verified")
+    {
+        errors.others = "Seller Not Verified"
+        return errors
+    }
 
 }

@@ -37,27 +37,29 @@ module.exports.sellerRegister = async(req,res)=>{
 
  try{
 
-    const {name,email,phoneno,password,confirmpassword,productType} = req.body
+    const {name,email,phoneno,password,productType} = req.body
 
-    if(!name || !email || !phoneno || !password || !confirmpassword || !productType)
-    {
-        throw Error("Please Enter All the Details")
-    }
+   //  if(!name || !email || !phoneno || !password || !confirmpassword || !productType)
+   //  {
+   //      throw Error("Please Enter All the Details")
+   //  }
    
-    if(phoneno.toString().length !=10)
-    {
-        throw Error("Phone Number is incorrect")    
-    }
+   //  if(phoneno.toString().length !=10)
+   //  {
+   //      throw Error("Phone Number is incorrect")    
+   //  }
 
-    if(password.length < 6)
-    {
-      throw Error("Password should be greater than 6 characters")     
-    }
+   //  if(password.length < 6)
+   //  {
+   //    throw Error("Password should be greater than 6 characters")     
+   //  }
 
-    if(password != confirmpassword)
-    {
-        throw Error("Password not matching") 
-    }
+   //  if(password != confirmpassword)
+   //  {
+   //      throw Error("Password not matching") 
+   //  }
+
+    const createHash = await bcrypt.hash(password,10)
 
     const user = await Seller.findOne({email})
 
@@ -68,14 +70,13 @@ module.exports.sellerRegister = async(req,res)=>{
         const newUser = await Seller.create({
             name,
             email,
-            password,
+            password:createHash,
             phoneno,
             productType
         })
         await newUser.save()
         res.send({
-         message:"User created successfully",
-         newUser
+         message:"User created successfully"
         })
      }
 
@@ -102,9 +103,10 @@ module.exports.sellerLogin = async(req,res)=>{
 
      if(user)
      {
-      // const validPassword = await bcrypt.compare(password,user.password)
-      // console.log(validPassword)
-        if(user.password == password)
+
+      if(user.verified){
+      const validPassword = await bcrypt.compare(password,user.password)
+        if(validPassword)
         {
 
             const token = createToken(user._id)
@@ -116,18 +118,19 @@ module.exports.sellerLogin = async(req,res)=>{
          })
           res.json({
             message:"Successfull Login",
-            id:user._id,
-            token:token
+            id:user._id
           })
-        }
-        else{
-       
-         throw Error("Please Enter valid Password")
-        }
+         }
+         else{
+            
+            throw Error("Please Enter valid Password")
+         }
+      }else{
+         throw Error("Seller Not Verified")
+      }
      }
      else
      {
-
         throw Error("Please Enter Valid Email")
      }
     }catch(err){
@@ -313,11 +316,13 @@ module.exports.verifyEmail = async(req,res)=>{
 
 module.exports.checkOtp = async(req,res)=>{
    try{
-    const {otp,email} = req.body
+    const {otp1,otp2,otp3,otp4,email} = req.body
     
-    if(!otp || !email){
+    if(!otp1 || !otp2 || !otp3 || !otp4 || !email){
         throw Error("Invalid")
     }
+
+    const otp = `${otp1}`+`${otp2}`+`${otp3}`+`${otp4}`
 
     const user = await Otp.findOne({email})
    
@@ -328,6 +333,7 @@ module.exports.checkOtp = async(req,res)=>{
         if(user.expiredAt < Date.now())
         {
             throw Error("Code has expired !")
+            await Otp.deleteMany({email})
         }else{
            const validOtp = await bcrypt.compare(otp,user.otp)
             if(!validOtp){
@@ -353,5 +359,15 @@ module.exports.checkOtp = async(req,res)=>{
         errors,created:false
        })
 }
+    
+}
+
+module.exports.sellerDetails = async(req,res)=>{
+
+  const seller = await Seller.findOne({_id:req.id})
+
+  res.send({
+   sellerDetail:seller
+  })
     
 }

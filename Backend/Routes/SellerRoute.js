@@ -7,7 +7,7 @@ const Product = require("../Schemas/ProductSchema")
 const router = express.Router()
 
 
-const {sellerLogin,sellerRegister, deleteProduct,addProduct,editProduct,verifyEmail,checkOtp} = require("../Controllers/SellerController")
+const {sellerLogin,sellerRegister, deleteProduct,addProduct,editProduct,verifyEmail,checkOtp,sellerDetails} = require("../Controllers/SellerController")
 
 const {CheckSeller} = require("../Middleware/AuthMiddleware")
 
@@ -21,7 +21,7 @@ router.route('/verifyotp').post(checkOtp)
 
 // router.route('/forgotpassword').post()
 
-router.route('/sellerdashboard').post(CheckSeller)
+router.route('/sellerdashboard').post(CheckSeller,sellerDetails)
 
 router.route('/addproduct').post(CheckSeller,addProduct)
 

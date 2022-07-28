@@ -1,16 +1,16 @@
 const Seller = require('../Schemas/SellerSchema')
+
 const jwt  = require("jsonwebtoken")
 
-module.exports.CheckSeller = (req,res,next)=>{
-    const token = req.headers.jwt;
+const {VerificationError} = require('../ErrorHandling/VerifyError')
+
+module.exports.CheckSeller = async(req,res,next)=>{
+    try{
     if(token){
         jwt.verify(token,"SecretKey",async(err,decodedToken)=>{   // header,payload,signature
             if(err){
-                
-                res.json({
-                        status:false
-                    });
-                next();
+               throw Error("Invalid User") 
+               
             }else{
                     const user = await Seller.findById(decodedToken.id)
                   
@@ -20,19 +20,17 @@ module.exports.CheckSeller = (req,res,next)=>{
                         next();
                     }
                 else{
-                  
-                    res.json(
-                        {
-                            status:false
-                        })
+                    throw Error("Invalid User") 
                 }
             }
         })
     }else{
-
-        res.json(
-            {
-                status:false
-            })
+        throw Error("Invalid User") 
     }
+}catch(err){
+    const error = VerificationError(err)
+    res.json({
+        error
+    })
+}
 }

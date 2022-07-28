@@ -4,17 +4,21 @@ import OTPVerifyLogo from "../images/otpverify-image.png";
 import InstaLogo from "../images/instagram-logo.svg";
 import LinkedinLogo from "../images/linkedin-logo.svg";
 import YoutubeLogo from "../images/youtube-logo.svg";
+import axios from 'axios'
 import GoogleLogo from "../images/google-logo.svg";
 import { BsArrowRightShort } from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate,useParams } from 'react-router-dom';
 import "../components/css/EmailOtpVerifyStyles.css"
 
 const OtpVerify = () => {
     const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
-  const [user, setUser] = useState({
-    email: "",
+  const navigate = useNavigate()
+
+  const {email} = useParams()
+  const [otp, setOtp] = useState({
+    email: email,
     otp1: "",
     otp2: "",
     otp3: "",
@@ -28,23 +32,28 @@ const OtpVerify = () => {
 
   const handleForm = (e) => {
     const {name, value} = e.target;
-    setUser({
-      ...user,
+    setOtp({
+      ...otp,
       [name]: value
     })
   }
 
- 
-
   const submitForm = (e) => {
     e.preventDefault();
-    setFormErrors(validate(user));
+    setFormErrors(validate(otp));
     setIsSubmit(true);
   }
 
   useEffect(() => {
     if( Object.keys(formErrors).length === 0 && isSubmit ){
-        console.log("submitted")
+        axios.post("http://localhost:5000/seller/verifyotp",{
+         ...otp
+        }).then(({data})=>{
+          if(data)
+          {
+            navigate('/login')
+          }
+        })
     }
   }, [formErrors]);
 
@@ -100,7 +109,7 @@ const OtpVerify = () => {
           <div className="form-container_emailOtp">
             <div className="top_emailOtp">
               <h2>Verify Your Email Id</h2>
-              <Link to="/signupuser">Create an account</Link>
+              <Link to="/signupotp">Create an account</Link>
             </div>
 
             <div className="line_emailOtp"></div>
@@ -114,17 +123,17 @@ const OtpVerify = () => {
                 <div className="form-full_emailOtp">
                 <div className="form-container-box_emailOtp">
                   <label>Email Address</label>
-                  <input type="text" name="email" placeholder="Your Email Address" value={user.email} onChange={handleForm} />
+                  <input type="text" name="email" placeholder="Your Email Address" value={otp.email}/>
                   <p className="errors-msg">{formErrors.email}</p>
                 </div>
 
                 <div className="form-container-box_emailOtp">
                   <label>Enter OTP</label>
                   <div className="otp-field_emailOtp">
-                    <input type="text" maxLength="1" name="otp1" value={user.otp1} onChange={handleForm} />
-                    <input type="text" maxLength="1" name="otp2" value={user.otp2} onChange={handleForm} />
-                    <input type="text" maxLength="1" name="otp3" value={user.otp3} onChange={handleForm} />
-                    <input type="text" maxLength="1" name="otp4" value={user.otp4} onChange={handleForm} />
+                    <input type="text" maxLength="1" name="otp1" value={otp.otp1} onChange={handleForm} />
+                    <input type="text" maxLength="1" name="otp2" value={otp.otp2} onChange={handleForm} />
+                    <input type="text" maxLength="1" name="otp3" value={otp.otp3} onChange={handleForm} />
+                    <input type="text" maxLength="1" name="otp4" value={otp.otp4} onChange={handleForm} />
                   </div>
                 </div>
                 </div>

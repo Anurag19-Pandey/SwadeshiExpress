@@ -30,6 +30,11 @@ module.exports.VerificationError = async(err)=>{
          errors.otp = "Invalid Code Passed.Check Your inbox "
          return errors
     }
+    if(err.message == "Invalid User")
+    {
+         errors.others = "Invalid User"
+         return errors
+    }
     
 
 }

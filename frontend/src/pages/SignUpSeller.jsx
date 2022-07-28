@@ -5,41 +5,55 @@ import InstaLogo from "../images/instagram-logo.svg";
 import LinkedinLogo from "../images/linkedin-logo.svg";
 import YoutubeLogo from "../images/youtube-logo.svg";
 import GoogleLogo from "../images/google-logo.svg";
+import {useNavigate} from 'react-router-dom'
+import axios from 'axios'
 import { BsArrowRightShort } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import "../components/css/SignUpSellerStyles.css"
 
 const SignUpSeller = () => {
+
+  const navigate = useNavigate()
+
+
+
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [checkboxCheck, setCheckboxCheck] = useState(false);
 
-  const [user, setUser] = useState({
+  const [seller, setSeller] = useState({
     name: "",
     email: "",
     password: "",
-    confirmpassword: "",
-    mobile: "",
-    category: ""
+    phoneno: "",
+    productType: ""
   });
 
   const handleForm = (e) => {
     const {name, value} = e.target;
-    setUser({
-      ...user,
+    setSeller({
+      ...seller,
       [name]: value
     })
+    console.log(name,value)
   }
 
   const submitForm = (e) => {
     e.preventDefault();
-    setFormErrors(validate(user));
+    setFormErrors(validate(seller));
     setIsSubmit(true);
   }
 
   useEffect(() => {
     if( Object.keys(formErrors).length === 0 && isSubmit ){
-      console.log("submitted")
+     axios.post("http://localhost:5000/seller/register",{
+          ...seller
+      }).then(({data})=>{
+        if(data){
+          navigate('/emailverify')
+        }
+      })
+     
     }else {
         console.log("errors")
     }
@@ -75,14 +89,14 @@ const SignUpSeller = () => {
       errors.confirmpassword = "Confirm password didn't match password";
     }
 
-    if(!values.mobile){
-      errors.mobile = "Mobile number required"
-    }else if(values.mobile.length !== 10){
-      errors.mobile = "Mobile number is Invalid";
+    if(!values.phoneno){
+      errors.phoneno = "phoneno number required"
+    }else if(values.phoneno.length !== 10){
+      errors.phoneno = "phoneno number is Invalid";
     }
 
-    if(!values.category){
-        errors.category = "Category required"
+    if(!values.productType){
+        errors.productType = "productType required"
     }
 
     if(!checkboxCheck){
@@ -144,52 +158,52 @@ const SignUpSeller = () => {
                 <div className="form-main-box_signupseller">
                 <div className="form-box_signupseller box1_signupseller">
                   <label>Name</label>
-                  <input type="text" name="name" placeholder="Your name" value={user.name} onChange={handleForm} />
+                  <input type="text" name="name" placeholder="Your name" value={seller.name} onChange={handleForm} />
                   <p className="errors-msg_signupseller">{formErrors.name}</p>
                 </div>
 
                 <div className="form-box_signupseller box2_signupseller">
                   <label>Email Address</label>
-                  <input type="email" name="email" placeholder="Your Email Address" value={user.email} onChange={handleForm} />
+                  <input type="email" name="email" placeholder="Your Email Address" value={seller.email} onChange={handleForm} />
                   <p className="errors-msg_signupseller">{formErrors.email}</p>
                 </div>
 
                 <div className="form-box_signupseller box3_signupseller">
                   <label>Password</label>
-                  <input type="password" name="password" placeholder="Enter Password" value={user.password} onChange={handleForm} />
+                  <input type="password" name="password" placeholder="Enter Password" value={seller.password} onChange={handleForm} />
                   <p className="errors-msg_signupseller">{formErrors.password}</p>
                 </div>
 
                 <div className="form-box_signupseller box4_signupseller">
                   <label>Confirm Password</label>
-                  <input type="password" name="confirmpassword" placeholder="Confirm Password" value={user.confirmpassword} onChange={handleForm} />
+                  <input type="password" name="confirmpassword" placeholder="Confirm Password" value={seller.confirmpassword} onChange={handleForm} />
                   <p className="errors-msg_signupseller">{formErrors.confirmpassword}</p>
                 </div>
 
                 <div className="form-box_signupseller box5_signupseller">
-                  <label style={{paddingBottom: "5px"}}>Mobile Number</label>
-                  <input type="text" name="mobile" placeholder="Your mobile number" value={user.mobile} onChange={handleForm} />
-                  <p className="errors-msg_signupseller">{formErrors.mobile}</p>
+                  <label style={{paddingBottom: "5px"}}>phoneno Number</label>
+                  <input type="text" name="phoneno" placeholder="Your phoneno number" value={seller.phoneno} onChange={handleForm} />
+                  <p className="errors-msg_signupseller">{formErrors.phoneno}</p>
                 </div>
 
                 <div className="form-box_signupseller box7_signupseller">
-                  <label style={{paddingBottom: "5px"}}>Select category of products to add -</label>
+                  <label style={{paddingBottom: "5px"}}>Select productType of products to add -</label>
                   <div>
-                    <input type="radio" name="category" value="clothing" className='input_box7_signupseller' onChange={handleForm} /> Clothing
+                    <input type="radio" name="productType" value="clothes" className='input_box7_signupseller' onChange={handleForm} /> Clothing
                   </div>
                   <div>
-                    <input type="radio" name="category" value="furniture" className='input_box7_signupseller' onChange={handleForm} /> Furniture
+                    <input type="radio" name="productType" value="furniture" className='input_box7_signupseller' onChange={handleForm} /> Furniture
                   </div>
                   <div>
-                  <input type="radio" name="category" value="utensils" className='input_box7_signupseller' onChange={handleForm} /> Utensils
+                  <input type="radio" name="productType" value="crockery" className='input_box7_signupseller' onChange={handleForm} /> Crockery
                   </div>
-                  <p className="errors-msg_signupseller">{formErrors.category}</p>
+                  <p className="errors-msg_signupseller">{formErrors.productType}</p>
                 </div>
 
                 <div className="box6_signupseller">
                   <div>
                   <input type="checkbox" id="cb1" onClick={() => setCheckboxCheck(!checkboxCheck)} />
-                  <label for="cb1"></label>
+                  <label htmlFor="cb1"></label>
                   <p>I agree to <a href="youtube.com">Terms and Conditions</a></p>
                   </div>
                   <p className="errors-msg_signupseller">{formErrors.checkbox}</p>

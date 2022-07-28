@@ -5,13 +5,16 @@ import LinkedinLogo from "../images/linkedin-logo.svg";
 import YoutubeLogo from "../images/youtube-logo.svg";
 import GoogleLogo from "../images/google-logo.svg";
 import { BsArrowRightShort } from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import axios from 'axios'
+import { Link,useNavigate } from 'react-router-dom';
 import "../components/css/LoginStyles.css"
 import HomeHeader from '../components/jsx/HomeHeader';
 
 const Login = () => {
     const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+
+  const navigate = useNavigate()
 
   const [user, setUser] = useState({
     email: "",
@@ -35,7 +38,13 @@ const Login = () => {
   useEffect(() => {
   
     if( Object.keys(formErrors).length === 0 && isSubmit ){
-      console.log("sunmitted");
+      axios.post("http://localhost:5000/seller/login",{
+        ...user
+       }).then(({data})=>{
+        if(data){
+          navigate('/')
+        }
+       })
     }
   }, [formErrors]);
 

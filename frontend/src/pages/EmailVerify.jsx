@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+ import React, { useState, useEffect } from 'react'
 import HomeHeader from '../components/jsx/HomeHeader';
 import EmailVerifyLogo from "../images/emailverify-image.png";
 import InstaLogo from "../images/instagram-logo.svg";
 import LinkedinLogo from "../images/linkedin-logo.svg";
 import YoutubeLogo from "../images/youtube-logo.svg";
+import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 import { BsArrowRightShort } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import "../components/css/EmailOtpVerifyStyles.css"
@@ -12,6 +14,9 @@ const EmailVerify = () => {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
   
+
+    const navigate = useNavigate()
+
     const [user, setUser] = useState({
       email: ""
     });
@@ -19,7 +24,7 @@ const EmailVerify = () => {
     const handleForm = (e) => {
       const {name, value} = e.target;
       setUser({
-        ...user,
+         ...user,
         [name]: value
       })
     }
@@ -32,7 +37,15 @@ const EmailVerify = () => {
   
     useEffect(() => {
       if( Object.keys(formErrors).length === 0 && isSubmit ){
-        console.log("submitted")
+         axios.post("http://localhost:5000/seller/verifyemail",{
+            ...user
+         }).then(({data})=>{
+            if(data){
+               navigate(`/otpverify/${data.email}`)
+            }
+         })
+      }else{
+        console.log("error")
       }
     }, [formErrors]);
   
