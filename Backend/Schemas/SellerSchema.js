@@ -22,8 +22,11 @@ const SellerSchema = new mongoose.Schema({
     },
     productType:{
          type:String,
-        required:true,
+         required:true,
          enum:["clothes","furniture","crockery"]
+    },
+    AadharCardNumber:{
+        type:Number
     },
     verified:{
         type:Boolean,

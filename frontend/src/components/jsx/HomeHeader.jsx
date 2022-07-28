@@ -33,7 +33,7 @@ const HomeHeader = () => {
             </li>
           </ul>
 
-          <button className="primary_btn_homeheader">Add Your Products</button>
+          <button className="primary_btn_homeheader"><Link to="/signupseller">Add Your Products</Link></button>
         </div>
       </div>
 

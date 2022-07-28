@@ -1,14 +1,17 @@
 require('dotenv').config()
 const express = require("express")
 const app = express()
-const databaseconnnect = require("./db/connect")
+const db = require("./db/connect")
 const Port = process.env.PORT || 5000
 const crypto = require("node:crypto") 
 const sellerRouter =  require("./Routes/SellerRoute")
+const databaseconnnect = require('./db/connect')
 const userRouter = require("./Routes/User")
 const productRouter = require("./Routes/ProductRoutes")
+
 const cors = require('cors')
-databaseconnnect()
+
+const {GridFsStorage} = require("multer-gridfs-storage")
 
 const key = "RangeKuttaMethod"
 
