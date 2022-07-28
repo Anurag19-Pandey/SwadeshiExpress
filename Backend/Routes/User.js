@@ -2,6 +2,9 @@ const express = require("express")
 const Usermodal = require("../Schemas/Userschema")
 const router = express.Router()
 const crypto = require("crypto")
+const {fetchuser} = require("../Middleware/Fetchuser")
+
+const {verifyuser,Wishlist} = require("../Controllers/UserController")
 
 router.post("/auth", async(req,res)=>{
    try {
@@ -15,11 +18,11 @@ router.post("/auth", async(req,res)=>{
         const details={
             Name:req.body.name,   
             Email:email,
-            Password : crypto.createHash('sha256').update(req.body.password).digest("ASCII"),
+            Password : crypto.createHash('sha256').update(req.body.password).digest('hex'),
             Phone: req.body.phone,
            }
-   
            const user =  await Usermodal.create(details);
+           user.save()
            if(user){
                console.log(user);
            }
@@ -30,7 +33,9 @@ router.post("/auth", async(req,res)=>{
    }   
 })
 
-router.post("/verif")
+router.route("/verif").post(verifyuser)
+
+router.route("/wishlist/:id").put(fetchuser,Wishlist)
 
 
 module.exports =router
