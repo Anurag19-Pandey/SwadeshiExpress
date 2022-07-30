@@ -7,10 +7,10 @@ const ProductCard = () => {
   return (
     <div className="product_container_productcard">
       <img src={P1} />
-      <div class="description_productcard">
+      <div className="description_productcard">
         <span>Clothing</span>
         <h5>Cartoon Astronaut T-Shirt</h5>
-        <div class="star_section_productcard">
+        <div className="star_section_productcard">
           <AiFillStar className="rating_icon_productcard"/>
           <AiFillStar className="rating_icon_productcard"/>
           <AiFillStar className="rating_icon_productcard"/>
