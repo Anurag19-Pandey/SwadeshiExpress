@@ -113,9 +113,11 @@ const Login = () => {
 
             <div className="line_login"></div>
 
-            <div className="main-error-msg_login">
+            {formErrors.final && (
+              <div className="main-error-msg_login">
               <p>{formErrors.final}</p>
             </div>
+            )}
 
             <div className="mid-part_login">
               <form>
@@ -123,7 +125,9 @@ const Login = () => {
                 <div className="form-container-box_login">
                   <label>Email Address</label>
                   <input type="text" name="email" placeholder="Your Email Address" value={user.email} onChange={handleForm} />
-                  <p className="errors-msg_login">{formErrors.email}</p>
+                  {formErrors.email && (
+                    <p className="errors-msg_login">{formErrors.email}</p>
+                  )}
                 </div>
 
                 <div className="form-container-box_login">

@@ -185,6 +185,7 @@
   align-items: flex-start;
   justify-content: center;
   margin-top: -35px;
+  margin-bottom: 20px;
 }
 
 .box6_signupseller div {
@@ -376,5 +377,9 @@ input.active:focus {
   .form-container_signupseller {
     padding: 10px;
     border: none;
+  }
+
+  .errors-msg_signupseller {
+    font-size: 15px;
   }
 }

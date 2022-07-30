@@ -57,7 +57,7 @@ const SignUpUser = () => {
     if(!values.email){
       errors.email = "Email required";
     }else if(!regex.test(values.email)){
-      errors.email = "Incorrect Email Format";
+      errors.email = "Incorrect email format";
     }
 
     if(!values.password){
@@ -130,9 +130,11 @@ const SignUpUser = () => {
 
             <div className="line_signupuser"></div>
 
-            <div className="main-msg_signupuser">
-              <p>{formErrors.final}</p>
-            </div>
+            {formErrors.final && (
+              <div className="main-msg_signupuser">
+                <p>{formErrors.final}</p>
+              </div>
+            )}
 
             <div className="mid-part_signupuser">
               <form onSubmit={submitForm}>

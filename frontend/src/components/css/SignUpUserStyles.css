@@ -363,4 +363,8 @@ input.active:focus {
     padding: 10px;
     border: none;
   }
+
+  .errors-msg_signupuser {
+    font-size: 15px;
+  }
 }
