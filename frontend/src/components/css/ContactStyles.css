@@ -1,0 +1,312 @@
+#head-banner {
+  margin-top: -2px;
+  background-image: url("../../images/banner/banner.png");
+  width: 100%;
+  height: 40vh;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#head-banner h2 {
+  color: white;
+}
+
+#head-banner p {
+  color: white;
+  text-align: center;
+}
+
+/*CONTACT PAGE*/
+
+#contact-details {
+  margin: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#contact-details .details {
+  width: 40%;
+}
+
+#contact-details .details span,
+.form-details form span {
+  font-size: 12px;
+}
+
+#contact-details .details h2,
+.form-details form h2 {
+  font-size: 26px;
+  line-height: 35px;
+  margin: 20px 0;
+  color: var(--primary-color);
+}
+
+.details h3 {
+  margin: 10px 0;
+}
+
+#contact-details .details li {
+  list-style: none;
+  display: flex;
+  padding: 10px 0;
+}
+
+.details_icon_contact {
+  font-size: 14px;
+  margin-right: 22px;
+  color: #041e42;
+}
+
+#contact-details .details li p {
+  margin: 0;
+  font-size: 14px;
+}
+
+#contact-details .map {
+  width: 55%;
+  height: 400px;
+}
+
+#contact-details .map iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.form-details {
+  margin: 80px 30px 50px 30px;
+  display: flex;
+  justify-content: space-between;
+  padding: 80px;
+  border: 1px solid #e1e1e1;
+}
+
+.form-details form {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-details form input,
+.form-details form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  outline: none;
+  margin-bottom: 20px;
+  border: 1px solid #e1e1e1;
+  font-size: 13px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.form-details form button {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  padding: 15px 30px;
+  background-color: #ffa333;;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.form-details .people {
+  padding-bottom: 25px;
+  padding-left: 20px;
+}
+
+.form-details .people div {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.form-details .people div img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.form-details .people div p {
+  font-size: 13px;
+  margin: 0;
+  line-height: 25px;
+}
+
+.form-details .people div p span {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+
+.newsletter {
+  margin: 20px 0 60px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-image: url("../../images/banner/b14.png");
+  background-repeat: no-repeat;
+  background-position: 20% 30%;
+  background-color: #041e42;
+}
+
+.newstext {
+  padding: 30px 0 20px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.newstext h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0;
+}
+
+.newstext p {
+  margin-top: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #818ea0;
+}
+
+.newstext p span {
+  color: #ffbd27;
+}
+
+.form {
+  display: flex;
+  padding-right: 70px;
+  width: 40%;
+}
+
+.form input {
+  height: 3.125rem;
+  padding: 0 1.25em;
+  font-size: 14px;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  outline: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.form button {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  padding: 15px 30px;
+  background-color: #088178;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 800px) {
+  #head-banner {
+    height: 40vh;
+    background-position: top 30% right 30%;
+  }
+
+  /*	CONTACT SECTION*/
+  #contact-details {
+    margin: 60px 50px;
+  }
+
+  .form-details {
+    padding: 40px;
+  }
+
+  .form-details form {
+    width: 45%;
+  }
+
+  .form-details .people {
+    margin-top: 40px;
+  }
+
+  .form-details .people div {
+    margin-bottom: 60px;
+  }
+
+  .newsletter {
+    flex-wrap: wrap;
+  }
+
+  .newstext {
+    padding: 10px 0 30px 20px;
+    margin-bottom: 0;
+  }
+
+  .form {
+    margin: -30px 20px 20px 20px;
+    padding-right: 0;
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 477px) {
+  #contact-details {
+    margin: 20px;
+    flex-direction: column;
+  }
+
+  #contact-details .details {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  #contact-details .map {
+    width: 100%;
+  }
+
+  .form-details {
+    margin: 10px;
+    margin-right: 20px;
+    /*		flex-direction: column;*/
+    padding: 30px 10px;
+    flex-wrap: wrap;
+  }
+
+  .form-details form {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .form-details form input,
+  .form-details form textarea {
+    width: 93%;
+    padding: 12px 10px;
+  }
+
+  .form-details .people div {
+    margin-bottom: 30px;
+  }
+
+  .newsletter {
+    flex-wrap: wrap;
+  }
+
+  .newstext {
+    padding: 10px 0 30px 20px;
+    margin-bottom: 0;
+  }
+
+  .form {
+    margin: -30px 20px 20px 20px;
+    padding-right: 0;
+    width: 100%;
+  }
+}

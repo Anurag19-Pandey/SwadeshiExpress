@@ -72,7 +72,7 @@ const SignUpSeller = () => {
     if(!values.email){
       errors.email = "Email required";
     }else if(!regex.test(values.email)){
-      errors.email = "Incorrect Email Format";
+      errors.email = "Incorrect email format";
     }
 
     if(!values.password){
@@ -90,13 +90,13 @@ const SignUpSeller = () => {
     }
 
     if(!values.phoneno){
-      errors.phoneno = "phoneno number required"
+      errors.phoneno = "Phone number required"
     }else if(values.phoneno.length !== 10){
-      errors.phoneno = "phoneno number is Invalid";
+      errors.phoneno = "Phone number is Invalid";
     }
 
     if(!values.productType){
-        errors.productType = "productType required"
+        errors.productType = "Product type required"
     }
 
     if(!checkboxCheck){
@@ -149,9 +149,11 @@ const SignUpSeller = () => {
 
             <div className="line_signupseller"></div>
 
-            <div className="main-msg_signupseller">
+            {formErrors.final && (
+              <div className="main-msg_signupseller">
               <p>{formErrors.final}</p>
             </div>
+            )}
 
             <div className="mid-part_signupseller">
               <form onSubmit={submitForm}>
@@ -181,13 +183,13 @@ const SignUpSeller = () => {
                 </div>
 
                 <div className="form-box_signupseller box5_signupseller">
-                  <label style={{paddingBottom: "5px"}}>phoneno Number</label>
-                  <input type="text" name="phoneno" placeholder="Your phoneno number" value={seller.phoneno} onChange={handleForm} />
+                  <label style={{paddingBottom: "5px"}}>Phone Number</label>
+                  <input type="text" name="phoneno" placeholder="Your phone number" value={seller.phoneno} onChange={handleForm} />
                   <p className="errors-msg_signupseller">{formErrors.phoneno}</p>
                 </div>
 
                 <div className="form-box_signupseller box7_signupseller">
-                  <label style={{paddingBottom: "5px"}}>Select productType of products to add -</label>
+                  <label style={{paddingBottom: "5px"}}>Select type of products to add -</label>
                   <div>
                     <input type="radio" name="productType" value="clothes" className='input_box7_signupseller' onChange={handleForm} /> Clothing
                   </div>

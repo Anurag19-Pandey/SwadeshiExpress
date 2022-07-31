@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/HomeHeaderStyles.css";
 import { FaTimes, FaBars } from "react-icons/fa";
 
 const HomeHeader = () => {
+  const navigate = useNavigate();
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -23,17 +24,18 @@ const HomeHeader = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/">About</Link>
-            </li>
-            <li>
-              <Link to="/">Contact</Link>
+              <Link to="/contact">Contact</Link>
             </li>
             <li>
               <Link to="/">Products</Link>
             </li>
           </ul>
 
-          <button className="primary_btn_homeheader"><Link to="/signupseller">Add Your Products</Link></button>
+          <div className="button_container_homeheader">
+            <button className="secondary_btn_homeheader" onClick={() => navigate("/signupuser")}>Sign Up</button>
+            <button className="primary_btn_homeheader" onClick={() => navigate("/signupseller")}>Add Your Products</button>
+          </div>
+
         </div>
       </div>
 

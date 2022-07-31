@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../css/HomeBanner1Styles.css"
 
 const HomeBanner1 = () => {
+
   return (
     <div className="homebanner1">
       <div className="text_container_homebanner1">
@@ -14,7 +15,6 @@ const HomeBanner1 = () => {
             <Link to="/" className='banner_button_homebanner1'>Shop Now</Link>
         </div>
       </div>
-      
     </div>
   )
 }

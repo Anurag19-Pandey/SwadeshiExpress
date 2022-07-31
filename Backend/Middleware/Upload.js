@@ -1,32 +1,57 @@
 const db = require("../db/connect")
+const connection = require('../db/connect')
 const {GridFsStorage} = require("multer-gridfs-storage")
 const mongoose = require("mongoose");
 const multer = require("multer");
+const Grid = require('gridfs-stream')
 
-let bucket ;
+let gfs,gridfsBucket;
 
-db.on("connected",()=>{
-    var dbs = db.db
-    bucket = new mongoose.mongo.GridFSBucket(dbs,{
-      bucketName:"Imagebucket"
-    })
-})
+const conn = mongoose.connection
 
-let store = new GridFsStorage({
-    url:"mongodb://localhost:27017/SwadeshiExpress",
+conn.once("open",()=>{
+    gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: 'Imagebucket'
+      });
+     
+        gfs = Grid(conn.db, mongoose.mongo);
+        gfs.collection('Imagebucket');
+     })
+// db.on("connected",()=>{
+//     var dbs = db.db
+//     bucket = new mongoose.mongo.GridFSBucket(dbs,{
+//       bucketName:"Imagebucket"
+//     })
+//     gfs = Grid(dbs,mongoose.mongo)
+//   gfs.collection('Imagebucket')
+// })
+
+// db.on("connected",()=>{
+//     var dbs = db.db
+//     gfs = Grid(dbs,mongoose.mongo)
+//     gfs.collection('Imagebucket')
+// })
+
+
+const storage = new GridFsStorage({
+    url:process.env.MONGO_URI,
+    options:{
+        useNewUrlParser:true,
+        useUnifiedTopology:true
+    },
     file:(req,file)=>{
-        return new Prosmise((resolve,reject)=>{
-            const filename = file.originalname;
-            const fileInfo={
-                filename : filename,
-                bucketName:"Imagebucket"
-            }
-            resolve(fileInfo)
-        })
+        const match = ["image/jpeg","image/png","image/jpg"]
+        if(match.indexOf(file.mimetype) === -1){
+            const filename = `${file.originalname}`;
+            return filename
+        }
+        return {
+           bucketName:"Imagebucket",
+           filename:`${file.originalname}`
+        }
     }
 })
 
-const upload =multer({storage:store})
+const upload = multer({storage})
 
-module.exports = bucket
 module.exports = upload

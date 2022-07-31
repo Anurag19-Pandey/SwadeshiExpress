@@ -378,4 +378,8 @@ input.active:focus {
     padding: 10px;
     border: none;
   }
+
+  .errors-msg_signupseller {
+    font-size: 15px;
+  }
 }

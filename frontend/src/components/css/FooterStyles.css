@@ -1,4 +1,4 @@
-h1 {
+/* h1 {
   font-size: 50px;
   line-height: 64px;
   color: #222222;
@@ -21,7 +21,7 @@ p {
   font-size: 16px;
   color: #465b52;
   margin: 15px 0 20px 0;
-}
+} */
 
 .footer {
   display: flex;
@@ -48,21 +48,25 @@ p {
   font-family: "Open Sans", sans-serif;
   font-weight: 800;
   color: #e4eddb;
+  line-height: 54px;
 }
 
 .footer h4 {
   font-size: 14px;
   color: #fff;
+  line-height: 40px;
 }
 
 .footer p {
   font-size: 13px;
   margin: 0 0 8px 0;
   color: #d7e1ea;
+  margin: 5px 0 10px 0;
 }
 
 .footer a {
   font-size: 13px;
+  line-height: 20px;
   margin: 0 0 8px 0;
   text-decoration: none;
   color: #d7e1ea;
