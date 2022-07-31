@@ -10,8 +10,8 @@ import { AiFillYoutube } from 'react-icons/ai';
 const Footer = () => {
   return (
     <div className='footer'>
-		<div class="col_footer">
-			<div class="f-logo_footer">
+		<div className="col_footer">
+			<div className="f-logo_footer">
                 <h2>Swadeshi Express</h2>
             </div>
 			
@@ -19,9 +19,9 @@ const Footer = () => {
 			<p><strong>Address: </strong>246 Mall Road , Street 12, Mumbai</p>
 			<p><strong>Phone: </strong>+91 9876543210 / +91 1234567890</p>
 			<p><strong>Hours: </strong>10:00 - 18:00, Mon - Sun</p>
-			<div class="follow_footer">
+			<div className="follow_footer">
 				<h4>Follow Us</h4>
-				<div class="icon_footer">
+				<div className="icon_footer">
                     <FaFacebookSquare className='icon_logos_footer' />
                     <BsInstagram className='icon_logos_footer' />
                     <AiFillYoutube className='icon_logos_footer' />
@@ -30,7 +30,7 @@ const Footer = () => {
 			</div>
 		</div>
 		
-		<div class="col_footer">
+		<div className="col_footer">
 			<h4>About</h4>
 			<a href="#">About us</a>
 			<a href="#">Delivery Information</a>
@@ -39,7 +39,7 @@ const Footer = () => {
 			<a href="#">Contact Us</a>
 		</div>
 		
-		<div class="col_footer">
+		<div className="col_footer">
 			<h4>My Account</h4>
 			<a href="#">Sign In</a>
 			<a href="#">View Cart</a>
@@ -48,10 +48,10 @@ const Footer = () => {
 			<a href="#">Help</a>
 		</div>
 		
-		<div class="col_footer install_footer">
+		<div className="col_footer install_footer">
 			<h4>Install App</h4>
 			<p>From App Store or Google Play</p>
-			<div class="row_footer">
+			<div className="row_footer">
 				<img src={App} alt="app" />
 				<img src={Play} alt="play" />
 			</div>
