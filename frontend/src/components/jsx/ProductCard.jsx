@@ -25,7 +25,7 @@ const ProductCard = () => {
 
   return (
   <div className="product_details">
-    {/* {
+    {
       product.map((prod)=>(     
         <div className="product_container_productcard" key={prod._id} onClick={()=>{navigate(`/singleproduct/${prod._id}/${prod.imageId}`)}}>
             <img  className='imagesproduct' src={`http://localhost:5000/product/images/${prod.imageId}`} alt="" />
@@ -47,26 +47,7 @@ const ProductCard = () => {
          </div>
         </div>
           )) 
-        } */}
-        <div className="product_container_productcard">
-            <img  className='imagesproduct' src={P1} alt="" />
-           <div className="description_productcard">
-           <span>NIKE</span>
-           <h5>Summer T-Shirt</h5>
-           <span>hhhhh</span>
-           <div className="star_section_productcard">
-             <AiFillStar className="rating_icon_productcard"/>
-             <AiFillStar className="rating_icon_productcard"/>
-             <AiFillStar className="rating_icon_productcard"/>
-             <AiFillStar className="rating_icon_productcard"/>
-             <AiFillStar className="rating_icon_productcard"/>
-           </div>
-           <h4>&#x20B9;  80</h4>
-         </div>
-         <div className="cart_icon_container_productcard">
-           <AiOutlineShoppingCart className="cart_icon_productcard" />
-         </div>
-        </div>
+        }
         </div>
   );
 };
