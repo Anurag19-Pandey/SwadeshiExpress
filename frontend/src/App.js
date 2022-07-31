@@ -9,6 +9,7 @@ import SignUpSeller from "./pages/SignUpSeller";
 import SignUpUser from "./pages/SignUpUser";
 import Contact from "./pages/Contact";
 import SingleProduct from "./pages/SingleProduct";
+import Products from "./pages/Products";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/otpverify/:email" element={<OtpVerify />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/signupseller" element={<SignUpSeller />} />
+        <Route path="/products" element={<Products />} />
       </Routes>
     </BrowserRouter>
   );
