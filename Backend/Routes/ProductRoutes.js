@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Grid = require('gridfs-stream')
 const router = express.Router()
 const Product = require('../Schemas/ProductSchema')
-const {getAllProducts, deleteProduct,editProduct} = require("../Controllers/ProductController")
+const {getAllProducts, deleteProduct,editProduct,singleProduct} = require("../Controllers/ProductController")
 
 const upload = require('../Middleware/Upload')
 
@@ -20,7 +20,7 @@ conn.once("open",()=>{
         gfs.collection('Imagebucket');
      })
 
-router.route('/getallproducts').get(getAllProducts)
+     router.route('/getallproducts').get(getAllProducts)
 
 router.route('/upload').post(upload.single("file"),async(req,res)=>{
     if(req.file === undefined)   return res.send({status:false})
@@ -46,9 +46,9 @@ router.route('/upload').post(upload.single("file"),async(req,res)=>{
 router.route('/file/:s_id').get(async(req,res)=>{
     try{
  
-        const seller = await Product.find({id:req.params.s_id})
+         const seller = await Product.find({id:req.params.s_id})
         //    console.log(seller)
-const imagearray = []
+           const imagearray = []
            for(i=0;i<seller.length;i++)
            {
                  var newId = mongoose.Types.ObjectId(seller[i].imageId)
@@ -119,6 +119,9 @@ router.get('/images/:id',(req,res)=>{
        }
       })
 })
+
+
+router.route('/getproduct/:id').get(singleProduct)
 
 router.route('/deleteproduct').delete(deleteProduct)
 

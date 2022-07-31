@@ -2,13 +2,16 @@ import React,{useEffect,useState} from "react";
 import P1 from "../../images/products/f1.jpg";
 import "../css/ProductCardStyles.css";
 import { AiFillStar, AiOutlineShoppingCart } from "react-icons/ai"
+
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = () => {
 
   const [image,setImage] = useState([]) 
   const [product,setProduct] = useState([])
-  let file_id
+
+  const navigate = useNavigate()
   
   useEffect(()=>{ 
     const getproduct = async()=>{
@@ -24,9 +27,8 @@ const ProductCard = () => {
   <div className="product_details">
     {/* {
       product.map((prod)=>(     
-        file_id = prod.imageId,
-        <div className="product_container_productcard" key={prod._id}>
-            <img  className='imagesproduct' src={`http://localhost:5000/product/images/${file_id}`} alt="" />
+        <div className="product_container_productcard" key={prod._id} onClick={()=>{navigate(`/singleproduct/${prod._id}/${prod.imageId}`)}}>
+            <img  className='imagesproduct' src={`http://localhost:5000/product/images/${prod.imageId}`} alt="" />
            <div className="description_productcard">
            <span>{prod.category}</span>
            <h5>{prod.productname}</h5>
