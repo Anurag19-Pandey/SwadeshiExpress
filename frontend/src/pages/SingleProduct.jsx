@@ -1,27 +1,38 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Footer from '../components/jsx/Footer';
 import HomeHeader from '../components/jsx/HomeHeader';
 import "../components/css/SingleProductStyles.css";
 import Img1 from "../images/products/f1.jpg"
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-
+import { useParams } from "react-router-dom";
+import axios from "axios"
 
 const SingleProduct = () => {
+
+	const [product,setProduct] = useState({})
+	const {id,imageid} = useParams()
+
+useEffect(()=>{
+
+		axios.get(`http://localhost:5000/product/getproduct/${id}`).then(({data})=>{
+			setProduct(data)		
+		 })
+ },[])
+
   return (
     <div>
       <HomeHeader />
-
       <section id="prodetails_singleproduct" className='section-p1_singleproduct'>
 		<div className="single-product-image_singleproduct">
-			<img src={Img1} alt="Our 1st Product" style={{width: "100%"}} id="MainImg" />
+			<img src={`http://localhost:5000/product/images/${imageid}`} alt="Our Product" style={{width: "100%"}} id="MainImg" />
 		</div>
 		
 		<div className="single-product-details_singleproduct">
-			<h6>Home / T-Shirt</h6>
-			<h4>Men's Fashion T-Shirt</h4>
-			<h2>$78.00</h2>
+			<h5>Category / {product.category}</h5>
+			<h4>{product.productname}</h4>
+			<h2>&#x20B9; {product.price}</h2>
 			<select>
-				<option>Select Option</option>
+				<option>{product.size}</option>
 				<option>Small</option>
 				<option>Medium</option>
 				<option>Large</option>
@@ -29,12 +40,12 @@ const SingleProduct = () => {
 				<option>XXL</option>
 			</select>
 			<div className='details_cart_singleproduct'>
-			<input type="number" value="1" />
+			<input type="number" defaultValue={1} min="1" max={product.quantity}/>
 			<button>Add To Cart <AiOutlineShoppingCart size={16} /></button>
 			</div>
 			<h4>Product Details</h4>
 			<br></br>
-			<span>The Gildan Ultra Cotton T-Shirt is made from a substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton, this classic fit preshunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.</span>
+			<span>{product.description}</span>
 		</div>
 	</section>
 
