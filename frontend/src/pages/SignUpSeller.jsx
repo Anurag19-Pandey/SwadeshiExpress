@@ -53,9 +53,6 @@ const SignUpSeller = () => {
           navigate('/emailverify')
         }
       })
-     
-    }else {
-        console.log("errors")
     }
   }, [formErrors]);
 

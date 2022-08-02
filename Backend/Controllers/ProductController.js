@@ -32,3 +32,16 @@ module.exports.singleProduct = async(req,res)=>{
     res.send(product)
 
 }
+
+module.exports.categoryProduct = async(req,res)=>{
+   
+    const {type} = req.params
+
+    const product = await Product.find({category:type})
+
+    if(product){
+        res.send(product)
+    }else{
+        res.send("No Products are available")
+    }
+}

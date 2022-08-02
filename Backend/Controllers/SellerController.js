@@ -136,7 +136,6 @@ module.exports.addProduct = async (req, res, next) => {
             category,
             quantity,
             price,
-            rating,
             size,
             description
          })

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Grid = require('gridfs-stream')
 const router = express.Router()
 const Product = require('../Schemas/ProductSchema')
-const {getAllProducts, deleteProduct,editProduct,singleProduct} = require("../Controllers/ProductController")
+const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct} = require("../Controllers/ProductController")
 
 const upload = require('../Middleware/Upload')
 
@@ -18,9 +18,9 @@ conn.once("open",()=>{
      
         gfs = Grid(conn.db, mongoose.mongo);
         gfs.collection('Imagebucket');
-     })
+})
 
-     router.route('/getallproducts').get(getAllProducts)
+router.route('/getallproducts').get(getAllProducts)
 
 router.route('/upload').post(upload.single("file"),async(req,res)=>{
     if(req.file === undefined)   return res.send({status:false})
@@ -100,7 +100,6 @@ router.get('/allproductsimage',(req,res)=>{
       })
 })
 
-
 router.get('/images/:id',(req,res)=>{
     gfs.files.findOne({_id:mongoose.Types.ObjectId(req.params.id)},(err,file)=>{
         //check if files 
@@ -120,12 +119,13 @@ router.get('/images/:id',(req,res)=>{
       })
 })
 
-
 router.route('/getproduct/:id').get(singleProduct)
 
 router.route('/deleteproduct').delete(deleteProduct)
 
 router.route('/editproduct').put(editProduct)
+
+router.route('/:type').get(categoryProduct)
 
 module.exports = router
 
