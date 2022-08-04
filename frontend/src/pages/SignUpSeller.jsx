@@ -49,13 +49,10 @@ const SignUpSeller = () => {
      axios.post("http://localhost:5000/seller/register",{
           ...seller
       }).then(({data})=>{
-        if(data){
+        if(data.message === "success"){
           navigate('/emailverify')
         }
       })
-     
-    }else {
-        console.log("errors")
     }
   }, [formErrors]);
 

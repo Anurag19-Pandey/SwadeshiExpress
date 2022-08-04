@@ -1,0 +1,115 @@
+.Seller_info_Seller{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* background-color: rgb(255, 233, 191); */
+    gap:2rem;
+    padding: 20px 0;
+    border-bottom: 0.5px solid black;
+}
+
+.Seller_info_image{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 10px;
+
+}
+.Seller_info{
+    padding: 0 20px;
+}
+
+.Seller_info_image img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+.Seller_info_name{
+    font-weight: 900;
+    font-size: 2.1rem;
+    margin: 20px 0;
+    color: #1e2734;
+}
+.Seller_info_location{
+    font-size: 1.1rem;
+    color: #1e2734;
+    margin: 10px 0;
+}
+
+.Seller_info_Contact{
+    background-color: #ffa333;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.Seller_Heading{
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #1e2734;
+    margin: 20px 0 0 0;
+}
+
+.seller_by{
+    text-align: center;
+}
+
+.Product_wrapper_seller{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    padding: 0.9rem;
+    border-bottom: solid 0.2px #1e2734;
+}
+
+.Seller_Product_post{
+    padding: 4vh 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit_btn_post{
+  
+}
+
+.Seller_Postform{
+    
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+.Seller_Post_preview{
+    flex-basis: 200px;
+    flex-grow: 0.3;
+}
+
+.Seller_product_post_head{
+    font-size: 2.1rem;
+    font-weight: 800;
+    text-align: center;
+    color: #1e2734;
+    width: 100%;
+    margin: 0 0 20px 0;
+}
+
+.Seller_Postform input ,.Seller_Postform select{
+    padding: 5px;
+    font-size: 1.2rem;
+    width: 80%;
+    margin: auto;
+}
+
+.Seller_Postform label{
+    margin: 13px 0 7px 0;
+    font-weight: 800;
+    font-size: 1.1rem;
+}

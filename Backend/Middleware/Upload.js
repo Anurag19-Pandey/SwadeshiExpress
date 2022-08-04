@@ -17,22 +17,6 @@ conn.once("open",()=>{
         gfs = Grid(conn.db, mongoose.mongo);
         gfs.collection('Imagebucket');
      })
-// db.on("connected",()=>{
-//     var dbs = db.db
-//     bucket = new mongoose.mongo.GridFSBucket(dbs,{
-//       bucketName:"Imagebucket"
-//     })
-//     gfs = Grid(dbs,mongoose.mongo)
-//   gfs.collection('Imagebucket')
-// })
-
-// db.on("connected",()=>{
-//     var dbs = db.db
-//     gfs = Grid(dbs,mongoose.mongo)
-//     gfs.collection('Imagebucket')
-// })
-
-
 const storage = new GridFsStorage({
     url:process.env.MONGO_URI,
     options:{

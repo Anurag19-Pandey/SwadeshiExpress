@@ -17,24 +17,22 @@ const ProductSchema = new mongoose.Schema({
        required:true
     },
     price: {
-        type: Number,
+         type: Number,
          required: true,
-        trim: true
+         trim: true
     },
     rating: {
         type: Number,
-         required: true,
-        trim: true
+        default:0
     },
     size: {
         type:String,
          required: true,
-        trim: true
+         trim: true
     },
     quantity: {
         type: Number,
         required: true,
-        trim: true
     },
     imageId:{
         type:String

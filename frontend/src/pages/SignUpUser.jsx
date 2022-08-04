@@ -8,11 +8,16 @@ import GoogleLogo from "../images/google-logo.svg";
 import { BsArrowRightShort } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import "../components/css/SignUpUserStyles.css"
+import {useNavigate} from 'react-router-dom'
+import axios from 'axios'
 
 const SignUpUser = () => {
+  
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [checkboxCheck, setCheckboxCheck] = useState(false);
+
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     name: "",
@@ -38,7 +43,11 @@ const SignUpUser = () => {
 
   useEffect(() => {
     if( Object.keys(formErrors).length === 0 && isSubmit ){
-      console.log("submitted")
+    axios.post(`http://localhost:5000/user/register`).then(({data})=>{
+      if(data.message === "success"){
+        navigate('/emailverify') 
+      }
+    })
     }else {
         console.log("errors")
     }

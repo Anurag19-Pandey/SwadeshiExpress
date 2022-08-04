@@ -5,7 +5,7 @@ import InstaLogo from "../images/instagram-logo.svg";
 import LinkedinLogo from "../images/linkedin-logo.svg";
 import YoutubeLogo from "../images/youtube-logo.svg";
 import axios from 'axios'
-import GoogleLogo from "../images/google-logo.svg";
+// import GoogleLogo from "../images/google-logo.svg";
 import { BsArrowRightShort } from "react-icons/bs";
 import { Link, useNavigate,useParams } from 'react-router-dom';
 import "../components/css/EmailOtpVerifyStyles.css"
@@ -46,10 +46,10 @@ const OtpVerify = () => {
 
   useEffect(() => {
     if( Object.keys(formErrors).length === 0 && isSubmit ){
-        axios.post("http://localhost:5000/seller/verifyotp",{
+        axios.post("http://localhost:5000/verifyotp",{
          ...otp
         }).then(({data})=>{
-          if(data)
+          if(data.message === "success")
           {
             navigate('/login')
           }
@@ -78,7 +78,7 @@ const OtpVerify = () => {
       <div className="main_emailOtp">
         <div className="left-part_emailOtp">
           <div className="top_emailOtp">
-            <h2>Find Your Dream Job !</h2>
+            <h2>Find Your Dream P !</h2>
             <p>Sign Up to become a part of our community</p>
           </div>
 

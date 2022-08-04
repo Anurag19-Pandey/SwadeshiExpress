@@ -7,21 +7,22 @@ const Product = require("../Schemas/ProductSchema")
 const router = express.Router()
 
 
-const {sellerLogin,sellerRegister, deleteProduct,addProduct,editProduct,verifyEmail,checkOtp,sellerDetails} = require("../Controllers/SellerController")
+const {sellerRegister, deleteProduct,addProduct,editProduct,sellerDetails} = require("../Controllers/SellerController")
 
 const {CheckSeller} = require("../Middleware/AuthMiddleware")
 
 router.route('/register').post(sellerRegister)
 
-router.route('/login').post(sellerLogin)
+// router.route('/login').post(sellerLogin)
 
-router.route('/verifyemail').post(verifyEmail)
+// router.route('/verifyemail').post(verifyEmail)
 
-router.route('/verifyotp').post(checkOtp)
+// router.route('/verifyotp').post(checkOtp)
 
-// router.route('/forgotpassword').post()
 
-router.route('/sellerdashboard').post(CheckSeller,sellerDetails)
+router.route('/sellerdashboard').post(CheckSeller)
+
+router.route('/sellerdetails/:id').get(sellerDetails)
 
 router.route('/addproduct').post(CheckSeller,addProduct)
 
