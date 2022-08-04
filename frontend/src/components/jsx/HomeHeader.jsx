@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/HomeHeaderStyles.css";
 import { FaTimes, FaBars } from "react-icons/fa";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const HomeHeader = () => {
   const navigate = useNavigate();
@@ -12,7 +13,13 @@ const HomeHeader = () => {
     <div className="homeheader">
       <div className="left_section_homeheader">
         <div className="logo_container_homeheader">
+          <div>
           <Link to="/">Swadeshi Express</Link>
+          </div>
+          <div className="cart_container_homeheader">
+            <div className="cart_no_homeheader">1</div>
+            <AiOutlineShoppingCart className="cart_icon_homeheader" />
+          </div>
         </div>
       </div>
 

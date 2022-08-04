@@ -10,6 +10,7 @@ import SignUpUser from "./pages/SignUpUser";
 import Contact from "./pages/Contact";
 import SingleProduct from "./pages/SingleProduct";
 import Products from "./pages/Products";
+import Cart from "./pages/Cart";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/signupseller" element={<SignUpSeller />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );
