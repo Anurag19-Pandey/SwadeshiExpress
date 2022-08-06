@@ -8,35 +8,22 @@ import { useNavigate } from "react-router-dom";
 
 const ProductCard = () => {
 
-<<<<<<< HEAD
-  const [image, setImage] = useState([])
   const [product, setProduct] = useState([])
-  let file_id
 
+  const navigate = useNavigate()
   useEffect(() => {
     const getproduct = async () => {
       axios.get(`http://localhost:5000/product/getallproducts`).then(({ data }) => {
-=======
-  const [image,setImage] = useState([]) 
-  const [product,setProduct] = useState([])
-
-  const navigate = useNavigate()
-  
-  useEffect(()=>{ 
-    const getproduct = async()=>{
-      axios.get(`http://localhost:5000/product/getallproducts`).then(({data})=>{
->>>>>>> 6567767cc1ed577fff384ea45433c9c1cad7ee26
-        // console.log(data)
+        console.log(data)
         setProduct(data)
       })
     }
     getproduct()
   }, [])
 
-  return (
-<<<<<<< HEAD
+  return (<>
     <div className="product_container_productcard">
-      <img src={P1} />
+      <img src={P1} alt="dress" />
       <div className="description_productcard">
         <span>Clothing</span>
         <h5>Cartoon Astronaut T-Shirt</h5>
@@ -46,63 +33,63 @@ const ProductCard = () => {
           <AiFillStar className="rating_icon_productcard" />
           <AiFillStar className="rating_icon_productcard" />
           <AiFillStar className="rating_icon_productcard" />
-
-          <div className="product_details">
-            {
-              product.map((prod) => (
-                file_id = prod.imageId,
-                <div className="product_container_productcard" key={prod._id}>
-                  <img className='imagesproduct' src={`http://localhost:5000/product/images/${file_id}`} alt="" />
-                  <div className="description_productcard">
-                    <span>{prod.category}</span>
-                    <h5>{prod.productname}</h5>
-                    <span>{prod.description}</span>
-                    <div className="star_section_productcard">
-                      <AiFillStar className="rating_icon_productcard" />
-                      <AiFillStar className="rating_icon_productcard" />
-                      <AiFillStar className="rating_icon_productcard" />
-                      <AiFillStar className="rating_icon_productcard" />
-                      <AiFillStar className="rating_icon_productcard" />
-                    </div>
-                    <h4>&#x20B9;  {prod.price}</h4>
-                  </div>
-                  <div className="cart_icon_container_productcard">
-                    <AiOutlineShoppingCart className="cart_icon_productcard" />
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-=======
-  <div className="product_details">
-    {
-      product.map((prod)=>(     
-        <div className="product_container_productcard" key={prod._id} onClick={()=>{navigate(`/singleproduct/${prod._id}/${prod.imageId}`)}}>
-            <img  className='imagesproduct' src={`http://localhost:5000/product/images/${prod.imageId}`} alt="" />
-           <div className="description_productcard">
-           <span>{prod.category}</span>
-           <h5>{prod.productname}</h5>
-           <span>{prod.description}</span>
-           <div className="star_section_productcard">
-             <AiFillStar className="rating_icon_productcard"/>
-             <AiFillStar className="rating_icon_productcard"/>
-             <AiFillStar className="rating_icon_productcard"/>
-             <AiFillStar className="rating_icon_productcard"/>
-             <AiFillStar className="rating_icon_productcard"/>
-           </div>
-           <h4>&#x20B9;  {prod.price}</h4>
-         </div>
-         <div className="cart_icon_container_productcard">
-           <AiOutlineShoppingCart className="cart_icon_productcard" />
-         </div>
-        </div>
-          )) 
-        }
->>>>>>> 6567767cc1ed577fff384ea45433c9c1cad7ee26
         </div>
       </div>
+      </div>
+      <div className="product_details">
+        {
+          product.map((prod) => (
+            <div className="product_container_productcard" key={prod._id}>
+              <img className='imagesproduct' src={`http://localhost:5000/product/images/${prod.imageId}`} alt='dress' />
+              <div className="description_productcard">
+                <span>{prod.category}</span>
+                <h5>{prod.productname}</h5>
+                <span>{prod.description}</span>
+                <div className="star_section_productcard">
+                  <AiFillStar className="rating_icon_productcard" />
+                  <AiFillStar className="rating_icon_productcard" />
+                  <AiFillStar className="rating_icon_productcard" />
+                  <AiFillStar className="rating_icon_productcard" />
+                  <AiFillStar className="rating_icon_productcard" />
+                </div>
+                <h4>&#x20B9;  {prod.price}</h4>
+              </div>
+              <div className="cart_icon_container_productcard">
+                <AiOutlineShoppingCart className="cart_icon_productcard" />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div className="product_details">
+        {
+          product.map((prod) => (
+            <div className="product_container_productcard" key={prod._id} onClick={() => { navigate(`/singleproduct/${prod._id}/${prod.imageId}`) }}>
+              <img className='imagesproduct' src={`http://localhost:5000/product/images/${prod.imageId}`} alt="dress" />
+              <div className="description_productcard">
+                <span>{prod.category}</span>
+                <h5>{prod.productname}</h5>
+                <span>{prod.description}</span>
+                <div className="star_section_productcard">
+                  <AiFillStar className="rating_icon_productcard" />
+                  <AiFillStar className="rating_icon_productcard" />
+                  <AiFillStar className="rating_icon_productcard" />
+                  <AiFillStar className="rating_icon_productcard" />
+                  <AiFillStar className="rating_icon_productcard" />
+                </div>
+                <h4>&#x20B9;  {prod.price}</h4>
+              </div>
+              <div className="cart_icon_container_productcard">
+                <AiOutlineShoppingCart className="cart_icon_productcard" />
+              </div>
+            </div>
+          ))
+        }
     </div>
+    </>
   );
 };
+
 
 export default ProductCard;

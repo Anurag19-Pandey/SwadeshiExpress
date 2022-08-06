@@ -25,11 +25,8 @@ const App = () => {
         <Route path="/otpverify/:email" element={<OtpVerify />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/signupseller" element={<SignUpSeller />} />
-<<<<<<< HEAD
         <Route path="/sellerdashboard" element={<SellerDashboard/>}/>
-=======
         <Route path="/products" element={<Products />} />
->>>>>>> 6567767cc1ed577fff384ea45433c9c1cad7ee26
       </Routes>
     </BrowserRouter>
   );

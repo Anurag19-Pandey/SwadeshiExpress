@@ -45,3 +45,39 @@ module.exports.categoryProduct = async(req,res)=>{
         res.send("No Products are available")
     }
 }
+
+module.exports.comment = async(req,res)=>{
+    const {id} = req.params
+    console.log(id);
+    const comment={
+        review:req.body.review,
+        user:req.body.user,
+        date:Date.now()
+    }
+
+    console.log("comment is ",comment);
+    const prod = await Product.findById(id)
+    console.log(prod);
+    const product = await Product.findByIdAndUpdate(id,{$push:{"comments":comment}},{new:true})
+    console.log(product);
+    if(product){
+        res.send("Posted")
+    }
+    else{
+        res.send("Unable to post")
+    }
+}
+
+module.exports.getcomments = async(req,res)=>{
+    const {id}=req.params
+    const product = await Product.findById(id)
+    console.log(product);
+    if(product){
+        const commentlist = product.comments
+        res.send(commentlist)
+    }
+    else{
+        res.send("Product does'nt exist")
+    }
+
+}

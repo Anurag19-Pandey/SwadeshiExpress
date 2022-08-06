@@ -1,0 +1,38 @@
+.Comment{
+    margin: 10px 0 15px 0;
+    /* background: #fff4e7; */
+}
+ 
+.Comment-Poster{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #041e42;
+    /* background: #ffeed9; */
+    padding: 5px;
+}
+
+.Comment-Poster-Details{
+    border-left: solid 2px #ffa333;
+    padding-left: 5px;
+}
+
+.Comment-Poster img{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.Comment-Poster-comment{
+    color: #041e42;
+    margin: 10px 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.Comment-Post-Time{
+    font-size: 0.6rem;
+}

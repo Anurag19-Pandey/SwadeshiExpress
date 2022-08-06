@@ -36,6 +36,9 @@ const ProductSchema = new mongoose.Schema({
     },
     imageId:{
         type:String
+    },
+    comments:{
+        type:Array,
     }
 });
 
