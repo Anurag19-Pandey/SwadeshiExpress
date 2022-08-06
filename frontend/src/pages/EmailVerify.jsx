@@ -37,7 +37,7 @@ const EmailVerify = () => {
   
     useEffect(() => {
       if( Object.keys(formErrors).length === 0 && isSubmit ){
-         axios.post("http://localhost:5000/seller/verifyemail",{
+         axios.post("http://localhost:5000/verifyemail",{
             ...user
          }).then(({data})=>{
             if(data){

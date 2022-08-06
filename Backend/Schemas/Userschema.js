@@ -2,23 +2,35 @@ const mongoose = require("mongoose")
 const schema = mongoose.Schema
 
 const UserSchema = new schema({
-    Name:{
+    name:{
         type:String,
         required:true
     },
-    Email:{
+    email:{
         type:String,
         required:true  
     },
-    Password:{
+    password:{
         type:String,
         required:true
     },
-    Phone:{
+    phoneno:{
         type:Number,
         required:true
     },
-    Wishlist:{
+    verified:{
+        type:Boolean,
+        default:false
+    },
+    wishlist:{
+        type:Array,
+        default:[]
+    },
+    addToCart:{
+        type:Array,
+        default:[]
+    },
+    userHistory:{
         type:Array,
         default:[]
     }

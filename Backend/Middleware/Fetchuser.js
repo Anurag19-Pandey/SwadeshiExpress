@@ -1,21 +1,34 @@
 const jwt = require("jsonwebtoken")
-const token = "SecretKey"
 
-module.exports.fetchuser=(req,res,next)=>{
-    try {
-        const Token = req.header("auth-token")
-        if(Token){
-            console.log(Token)
-            const data = jwt.verify(Token,token);
-            req.user = data.user;
-            console.log(data.user.id);
-            next();
+const User = require("../Schemas/Userschema")
+
+module.exports.checkUser=(req,res,next)=>{
+    try{
+        
+        const token = req.cookies.jwt;
+
+        if(token){
+            jwt.verify(token,"SecretKey",async(err,decodedToken)=>{   
+                if(err){
+                   throw Error("Invalid User") 
+                   
+                }else{
+                        const user = await User.findById(decodedToken.id)
+                      
+                        if(user)
+                        {
+                            req.id = decodedToken.id
+                            next();
+                        }
+                    else{
+                        res.send({message:"Invaid User"})
+                    }
+                }
+            })
+        }else{
+            res.send({message:"Invaid User"})
         }
-        else{
-            res.send("Login again.")
-        }
-    } catch (error) {
-        console.log(error);
-        res.send("Internal server Error")
+    }catch(err){
+       console.log(err)
     }
 }

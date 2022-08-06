@@ -1,61 +1,37 @@
-const Usermodal = require("../Schemas/Userschema")
-const crypto = require("crypto")
-const jwt = require("jsonwebtoken")
-const upload = require("../Middleware/Upload")
+const User = require("../Schemas/Userschema")
 
-const maxAge = 3*24*60*60;
+const bcrypt = require('bcryptjs')
 
-const createToken =(uid)=>{
-const data = {
-    user:{
-        id:uid
-    }
-}
-  const token =  jwt.sign(data,"SecretKey",{
-    expiresIn:maxAge
-   })
-   return token;
-}
 
-module.exports.verifyuser = async (req,res)=>{
-try {
-    console.log("Checking verify user");
-    const email = req.body.email
-    const user = await Usermodal.findOne({email})
-    console.log(user._id);
-    console.log("Line 28",user.Password);
-    if(user){
-        const password = crypto.createHash('sha256').update(req.body.password).digest('hex') 
-        console.log("Line 29",password);
-        if(user.Password == password){
-            console.log(user._id);
-            const token = createToken(user._id)
-            console.log(user._id);
-            console.log(token);
-            // res.cookie("jwt",token,{
-            //    withCredentials:true,
-            //    maxAge:maxAge*1000,
-            //    httpOnly:true
-            // })
-            res.json({
-                "success":true,
-                "token":token,
-                "id":user._id,
-            })
+module.exports.registerUser = async(req,res)=>{
+    try {
+
+        const {email,name,password,phoneno} = req.body;
+
+        const user = await User.find({email})
+       
+        if(user){
+           res.send({message:"User Already Register"})
         }
         else{
-            res.send("Nope still error go check plzz")
+            const hashPassword = await bcrypt.hash(password,10);
+
+            const newUser = new User({
+                name,   
+                email,
+                password : hashPassword,
+                phoneno,
+               })
+             
+               await newUser.save()
+               res.send({message:"success"})
         }
-    }
-    else{
-        res.send("User is still the problem")
-    }
-} catch (error) {
-    res.send(error)
-}
+       } catch (error) {
+        res.status(500).send("Unable to Register")
+       }   
 }
 
-module.exports.Wishlist=async (req,res)=>{
+module.exports.userWishlist=async (req,res)=>{
     try {
         const proceed = await Usermodal.findById(req.user.id)
         // console.log(proceed)

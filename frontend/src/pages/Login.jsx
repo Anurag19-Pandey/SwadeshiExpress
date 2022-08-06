@@ -9,11 +9,12 @@ import axios from 'axios'
 import { Link,useNavigate } from 'react-router-dom';
 import "../components/css/LoginStyles.css"
 import HomeHeader from '../components/jsx/HomeHeader';
-
+import {useCookies} from 'react-cookie'
 const Login = () => {
+  
     const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-
+  const [cookies,setCookie,removeCookie] = useCookies([])
   const navigate = useNavigate()
 
   const [user, setUser] = useState({
@@ -38,10 +39,16 @@ const Login = () => {
   useEffect(() => {
   
     if( Object.keys(formErrors).length === 0 && isSubmit ){
-      axios.post("http://localhost:5000/seller/login",{
+      axios.post("http://localhost:5000/login",{
         ...user
+       },{
+        withCredentials:true
        }).then(({data})=>{
-        if(data){
+        if(data.message === "seller"){
+          
+            navigate(`/sellerdashboard/${data.id}`)
+          
+        }else{
           navigate('/')
         }
        })

@@ -11,6 +11,7 @@ import SignUpUser from "./pages/SignUpUser";
 import Contact from "./pages/Contact";
 import SingleProduct from "./pages/SingleProduct";
 import Products from "./pages/Products";
+import Cart from "./pages/Cart";
 
 const App = () => {
   return (
@@ -25,8 +26,14 @@ const App = () => {
         <Route path="/otpverify/:email" element={<OtpVerify />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/signupseller" element={<SignUpSeller />} />
+<<<<<<< HEAD
         <Route path="/sellerdashboard" element={<SellerDashboard/>}/>
         <Route path="/products" element={<Products />} />
+=======
+        <Route path="/sellerdashboard/:id" element={<SellerDashboard/>}/>
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
+>>>>>>> 371822eb504570949831838139c0570e1b41e5a9
       </Routes>
     </BrowserRouter>
   );

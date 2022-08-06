@@ -74,18 +74,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+}
+
+.submit_btn_post{
+  
 }
 
 .Seller_Postform{
-    flex-basis: 300px;
-    flex-grow: 0.3;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
+    
+    display: block;
+    align-items: center;
     justify-content: center;
-    color: #1e2734;
-    padding: 0 1.5vw;
 }
 
 .Seller_Post_preview{
