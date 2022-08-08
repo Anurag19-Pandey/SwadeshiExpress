@@ -3,10 +3,14 @@ const mongoose = require("mongoose");
 const Grid = require('gridfs-stream')
 const router = express.Router()
 const Product = require('../Schemas/ProductSchema')
+<<<<<<< HEAD
 const Seller = require('../Schemas/SellerSchema')
 const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct,addtoCartProduct,getaddToCart,deleteaddtoProduct} = require("../Controllers/ProductController")
 
 const {CheckSeller} = require("../Middleware/AuthMiddleware")
+=======
+const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct,comment,getcomments} = require("../Controllers/ProductController")
+>>>>>>> 8032c07fb0f0325331c8c8fe02829548dd47a0fa
 
 const upload = require('../Middleware/Upload')
 
@@ -67,7 +71,6 @@ router.route('/file/:s_id').get(async(req,res)=>{
               
               readStream.pipe(res)
               imagearray.push(file)  
-              
            }
 
            res.send(imagearray)
@@ -140,6 +143,10 @@ router.route('/getaddtocart/:id').get(getaddToCart)
 
 router.route('/deleteproductaddtocart/:id/:pid').delete(deleteaddtoProduct)
 
+
+router.route('/postcomment/:id').post(comment)
+
+router.route('/getcomments/:id').get(getcomments)
 
 module.exports = router
 

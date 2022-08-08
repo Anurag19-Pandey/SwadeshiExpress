@@ -19,7 +19,7 @@ const Grid = require('gridfs-stream')
 //      })
 
 const storage = new GridFsStorage({
-    url:process.env.MONGO_URI,
+    url:"mongodb+srv://AnkitYadav:Ankit%40atlas@swadeshiexpress.q8yepl7.mongodb.net/SwadeshiExpress?retryWrites=true&w=majority",
     options:{
         useNewUrlParser:true,
         useUnifiedTopology:true
