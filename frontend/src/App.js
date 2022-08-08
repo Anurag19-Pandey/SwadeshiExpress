@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes,useNavigate } from "react-router-dom";
 import EmailVerify from "./pages/EmailVerify";
 import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
@@ -14,6 +14,7 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 
 const App = () => {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -28,7 +29,7 @@ const App = () => {
         <Route path="/signupseller" element={<SignUpSeller />} />
         <Route path="/sellerdashboard/:id" element={<SellerDashboard/>}/>
         <Route path="/products" element={<Products />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart/:id" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );

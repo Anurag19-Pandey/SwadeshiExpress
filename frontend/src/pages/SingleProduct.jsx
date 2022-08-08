@@ -19,6 +19,14 @@ useEffect(()=>{
 		 })
  },[])
 
+ const addToCart = async(p_id)=>{
+
+	const {data} = await axios.post(`http://localhost:5000/product/addtocart/${p_id}`,{},{
+	 withCredentials:true
+	})  
+	
+ }
+
   return (
     <div>
       <HomeHeader />
@@ -41,7 +49,7 @@ useEffect(()=>{
 			</select>
 			<div className='details_cart_singleproduct'>
 			<input type="number" defaultValue={1} min="1" max={product.quantity}/>
-			<button>Add To Cart <AiOutlineShoppingCart size={16} /></button>
+			<button onClick={()=>addToCart(product._id)}>Add To Cart <AiOutlineShoppingCart size={16} /></button>
 			</div>
 			<h4>Product Details</h4>
 			<br></br>

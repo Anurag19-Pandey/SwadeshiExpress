@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const Grid = require('gridfs-stream')
 const router = express.Router()
 const Product = require('../Schemas/ProductSchema')
-const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct} = require("../Controllers/ProductController")
+const Seller = require('../Schemas/SellerSchema')
+const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct,addtoCartProduct,getaddToCart,deleteaddtoProduct} = require("../Controllers/ProductController")
+
+const {CheckSeller} = require("../Middleware/AuthMiddleware")
 
 const upload = require('../Middleware/Upload')
 
@@ -22,24 +25,28 @@ conn.once("open",()=>{
 
 router.route('/getallproducts').get(getAllProducts)
 
-router.route('/upload').post(upload.single("file"),async(req,res)=>{
-    if(req.file === undefined)   return res.send({status:false})
-    
-    const newProduct = new Product({
-        id:req.body.id,
-        productname:req.body.productname,
-        category:req.body.category,
-        description:req.body.description,
-        price:req.body.price,
-        rating:req.body.rating,
-        size:req.body.size,
-        quantity:req.body.quantity,
-        imageId:req.file.id
-    })
-    await newProduct.save()
-    res.send({
-        status:true
-    })
+router.route('/upload/:id').post(upload.single("file"),async(req,res)=>{
+    if(req.file === undefined)
+    {   
+    return res.send({status:false})
+    }
+    else{
+            const newProduct = new Product({
+                id:req.params.id,
+                productname:req.body.productname,
+                category:req.body.category,
+                description:req.body.description,
+                price:req.body.price,
+                rating:req.body.rating,
+                size:req.body.size,
+                quantity:req.body.quantity,
+                imageId:req.file.id
+            })
+            await newProduct.save()
+        
+            res.redirect('http://localhost:3000/products')
+    }
+   
  
 })
 
@@ -126,6 +133,13 @@ router.route('/deleteproduct').delete(deleteProduct)
 router.route('/editproduct').put(editProduct)
 
 router.route('/:type').get(categoryProduct)
+ 
+router.route('/addtocart/:pid').post(CheckSeller,addtoCartProduct)
+
+router.route('/getaddtocart/:id').get(getaddToCart)
+
+router.route('/deleteproductaddtocart/:id/:pid').delete(deleteaddtoProduct)
+
 
 module.exports = router
 
