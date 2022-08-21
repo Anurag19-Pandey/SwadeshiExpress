@@ -5,18 +5,19 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const Grid = require('gridfs-stream')
 
-let gfs,gridfsBucket;
+// let gfs,gridfsBucket;
 
-const conn = mongoose.connection
+// const conn = mongoose.connection
 
-conn.once("open",()=>{
-    gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
-        bucketName: 'Imagebucket'
-      });
+// conn.once("open",()=>{
+//     gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+//         bucketName: 'Imagebucket'
+//       });
      
-        gfs = Grid(conn.db, mongoose.mongo);
-        gfs.collection('Imagebucket');
-     })
+//         gfs = Grid(conn.db, mongoose.mongo);
+//         gfs.collection('Imagebucket');
+//      })
+
 const storage = new GridFsStorage({
     url:"mongodb+srv://AnkitYadav:Ankit%40atlas@swadeshiexpress.q8yepl7.mongodb.net/SwadeshiExpress?retryWrites=true&w=majority",
     options:{

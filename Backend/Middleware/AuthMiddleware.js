@@ -15,9 +15,17 @@ module.exports.CheckSeller = async(req,res,next)=>{
                   
                     if(seller)
                     {
+                       if(req.params.pid){
+
+                           req.id = decodedToken.id
+                           next()
+                           
+                       }
+                      else{
                         res.json({
                             id:decodedToken.id
                         })
+                    }
                     }
                 else{
                     res.send({message:"Invalid User 2"})

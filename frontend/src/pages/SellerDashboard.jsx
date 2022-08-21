@@ -13,20 +13,22 @@ const SellerDashboard = () => {
 
        const navigate = useNavigate();
 
+
        const [userDetail,setUserDetail] = useState({})
+
+       const [cartLength,setcartLength] = useState()
 
     const {id} = useParams()
 
-    const [product,setpostProduct] = useState({
-        id:id,
-        productname:"",
-        category:"",
-        size:"",
-        quantity:"",
-        description:"",
-        price:"",
-        file:""
-       })
+    // const [product,setpostProduct] = useState({
+    //     id:id,
+    //     productname:"",
+    //     category:"",
+    //     size:"",
+    //     quantity:"",
+    //     description:"",
+    //     price:""
+    //    })
 
     useEffect(()=>{
         const verifyUser = async()=>{
@@ -40,7 +42,10 @@ const SellerDashboard = () => {
               }else{
                 const {data} = await axios.get(`http://localhost:5000/seller/sellerdetails/${id}`)
                 setUserDetail(data)
+
                 console.log(data);
+
+                setcartLength(data.addtoCart.length)
                 navigate(`/sellerdashboard/${id}`)
               }
             }
@@ -48,23 +53,28 @@ const SellerDashboard = () => {
         verifyUser()
     },[])
 
-    const handleForm = (e) => {
-        const {name, value} = e.target;
-        setpostProduct({
-          ...product,
-          [name]: value
-        })
-        console.log(name,value)
-      }
+    // const handleForm = (e) => {
+    //     const {name, value} = e.target;
+    //     setpostProduct({
+    //       ...product,
+    //       [name]: value
+    //     })
+    //     console.log(name,value)
+    //   }
     
 
-   const postProduct = ()=>{
+//    const postProduct = async(e)=>{
+//        e.preventDefault();
+//        const {data} = await axios.post(`http://localhost:5000/product/upload`,{
+//         ...product
+//        })
 
-   }
+//        console.log(data)
+//    }
 
   return (
       <div className='SellerDashboard'>
-        <Header/>
+        <Header id ={id} cartlength={cartLength}/>
         <div className="Seller_info_Seller">
             <div className="Seller_info_image">
                 <img src="https://pbs.twimg.com/media/E2JJMJsVIAE9Aq4.jpg:large" alt="Seller" />
@@ -92,48 +102,57 @@ const SellerDashboard = () => {
         </div>
         <h1 className='Seller_product_post_head'> Post Product </h1> 
         <div className="Seller_Product_post">
-            <form className='Seller_Postform'>
-                <div>
+            <form action={`http://localhost:5000/product/upload/${id}`} method='POST' encType='multipart/form-data' className='Seller_Postform'>
+                <div className="post_product">
                 <label>Name</label>
-                <input type="text" id='Name' name='productname' placeholder='Product Name' onChange={handleForm}/>
+                <input type="text"  id='Name' name='productname' placeholder='Product Name' />
+                <p className="post_product_error"></p>
                 </div>
-                <div>
+                <div className="post_product">
                 <label>Category</label>
-                <select name="category" id="size" onChange={handleForm}>
+                <select name="category">
                     <option value="Clothing">Clothing</option>
                     <option value="Furniture">Furniture</option>
                     <option value="Crokery">Crokery</option>
                 </select>
+                <p className="post_product_error"></p>
                 </div>
-
-                <div>
-                <label>Desctiption</label>
-                <input type="text" name="description" placeholder='Description' onChange={handleForm} />
+                <div className="post_product">
+                <label>Description</label>
+                <input type="text" name="description" placeholder='Description'  />
+                <p className="post_product_error"></p>
                 </div>
-               <div>
+               <div className="post_product">
                <label>Price</label>
-                <input type="number" name="price" placeholder='Price' onChange={handleForm}/>
+                <input type="number" name="price" placeholder='Price' />
+                <p className="post_product_error"></p>
                </div>
-              <div>
+              <div className="post_product">
               <label>Size</label>
-                <select name="size" id="size" placeholder='Size' onChange={handleForm} defaultValue="null">
+                <select name="size" id="size" placeholder='Size'  defaultValue="null">
                     <option value="S">S</option>
                     <option value="M">M</option>
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                     <option value="XXL">XXL</option>
                 </select>
+                <p className="post_product_error"></p>
               </div>
-                <div>
+                <div className="post_product">
                 <label>Quantity</label>
-                <input type="number" name="quantity" placeholder='Quantity' onChange={handleForm}/>
+                <input type="number" min={1} name="quantity" placeholder='Quantity'/>
+                <p className="post_product_error"></p>
                 </div>
-               <div>
+               <div className="post_product">
                <label>Image</label>
-                <input type="file" name='file' onChange={handleForm}/>
+                <input type="file" name="file"/>
+                <p className="post_product_error"></p>
+               </div>
+               <div className="post_product">
+               <button type="submit" className='submit_btn_post'>Post Product</button>
+               <p className="post_product_error"></p>
                </div>
             </form>
-               <button type="submit" className='submit_btn_post' onClick={postProduct}>Post Product</button>
         </div>
         <Footer/>
     </div>

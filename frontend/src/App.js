@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes,useNavigate } from "react-router-dom";
 import EmailVerify from "./pages/EmailVerify";
 import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
@@ -14,6 +14,7 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 
 const App = () => {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -30,7 +31,15 @@ const App = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/sellerdashboard/:id" element={<SellerDashboard/>}/>
         <Route path="/products" element={<Products />} />
+<<<<<<< HEAD
+        <Route path="/cart/:id" element={<Cart />} />
+=======
         <Route path="/cart" element={<Cart />} />
+<<<<<<< HEAD
+=======
+>>>>>>> 371822eb504570949831838139c0570e1b41e5a9
+>>>>>>> 8032c07fb0f0325331c8c8fe02829548dd47a0fa
+>>>>>>> 6bfbaf54cbc1fc72a98bfa5311b7006ce4de5c86
       </Routes>
     </BrowserRouter>
   );

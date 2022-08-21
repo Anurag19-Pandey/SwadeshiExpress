@@ -70,14 +70,56 @@
 }
 
 .Seller_Product_post{
-    padding: 4vh 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.post_product{
+    margin-bottom:10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post_product label{
+    padding-right: 10px;
+    width: 25%;
+}
+
+.post_product input{
+  outline: none;
+  padding: 12px 10px;
+  width: 100%;
+  border: 2px solid;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin: 3px 0;
+  transition: 0.1s;
+}
+
+.post_product select{
+    outline: none;
+    padding: 12px 10px;
+    width: 100%;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin: 3px 0;
+    transition: 0.1s;
+  }
+
 .submit_btn_post{
-  
+    background-color: #ffa333;
+    color: white;
+    border: none;
+    outline: none;
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: large;
+    margin-left: 90px;
 }
 
 .Seller_Postform{

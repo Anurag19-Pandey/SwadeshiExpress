@@ -10,7 +10,7 @@ import F5 from "../images/features/f5.png";
 import F6 from "../images/features/f6.png";
 import ProductSection from "../components/jsx/ProductSection";
 import Footer from "../components/jsx/Footer";
-
+import { useParams } from "react-router-dom";
 const features = [
   {
     feature: "Free shipping",
@@ -38,10 +38,13 @@ const features = [
   },
 ];
 
+
+
 const Home = () => {
+
   return (
     <div>
-      <HomeHeader />
+      <HomeHeader/>
       <HomeBanner1 />
       <div className="feature_container_home">
         <h1>What we offer ?</h1>

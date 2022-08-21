@@ -6,10 +6,25 @@ import EmptyCart from "../images/emptyCart.svg";
 import { Link } from "react-router-dom";
 import Footer from "../components/jsx/Footer";
 import ProductSection from "../components/jsx/ProductSection";
+import {useNavigate,useParams} from 'react-router-dom'
+ import {useCookies} from 'react-cookie'
+import axios from 'axios'
 
 const Cart = () => {
+
+
     const [isContent, setIsContent] = useState(false);
   const [isModal, setIsModal] = useState(false);
+
+  const [cookies,setCookie,removeCookie] = useCookies([])
+
+  const [cart,setCart] = useState([])
+
+  let price = 0;
+
+  const navigate = useNavigate();
+
+  const {id} = useParams()
 
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -39,10 +54,42 @@ const Cart = () => {
   }
 
   useEffect(() => {
+    const verifyUser = async()=>{
+      if(!cookies.jwt){
+         navigate('/login')
+      }else{
+         const {data} = await axios.post('http://localhost:5000/seller/sellerdashboard',{},{withCredentials:true})  
+         if(data.id != id){
+          removeCookie("jwt")
+          navigate('/login')
+        }else{
+    
+         const cartdata =  await axios.get(`http://localhost:5000/product/getaddtocart/${id}`)
+         if(cartdata.data.length == 0){
+          setIsContent(!isContent)
+         }else{
+           setCart(cartdata.data)           
+         }
+          
+        } 
+      }
+  }
+  verifyUser()
     if( Object.keys(formErrors).length === 0 && isSubmit ){
-     console.log("done")
+     
     }
-  }, [formErrors]);
+      
+    }, [formErrors,cart,cookies,removeCookie]);
+
+
+  const deleteProductAddtoCart = async(pid)=>{
+    const {data} =await axios.delete(`http://localhost:5000/product/deleteproductaddtocart/${id}/${pid}`)
+    setCart(data)
+    if(cart.length == 0)
+    {
+      setIsContent(!isContent) 
+    }
+  }
 
   const validate = (values) => {
     const errors = {};
@@ -65,7 +112,7 @@ const Cart = () => {
 
   return (
     <div>
-      <HomeHeader />
+      <HomeHeader id={id} cartlength={cart.length}/>
 
       <div className="cart_section">
         {isContent ? 
@@ -76,7 +123,7 @@ const Cart = () => {
                 <h2>Add Items to your cart</h2>
             </div>
         ) 
-        : (
+        : ( 
             <div className="products_cart_container_cart">
             <div className="top_products_section_cart">
               <h1>Shopping Cart</h1>
@@ -84,65 +131,43 @@ const Cart = () => {
             </div>
             <div className="middle_products_section_cart">
               <div className="line_cart"></div>
-              <div className="product_detail_section_cart">
+              {
+                cart.map((prod)=>(
+                  price += prod.price,
+                        <div className="product_detail_section_cart" key={prod._id}>
                 <div className="left_product_detail_cart">
-                  <img src={Img1} alt="product" />
+                  <img src={`http://localhost:5000/product/images/${prod.imageId}`} alt="product" />
                 </div>
                 <div className="products_info_cart">
                   <div className="top_products_info_cart">
-                    <h2>Nike | Summer T-Shirt</h2>
-                    <h3>&#8377; 1,800</h3>
+                    <h2>{prod.productname} | {prod.description}</h2>
+                    <h3>&#8377; {prod.price}</h3>
                   </div>
                   <div className="middle_products_info_cart">
-                    <h3>Clothing</h3>
-                    <p>In Stock</p>
+                    <h3>{prod.category}</h3>
+                    <p>available quantity : {prod.quantity}</p>
                   </div>
                   <div className="bottom_products_info_cart">
                     <div className="input_products_info_cart">
                       <label>Qty</label>
-                      <input type="number" defaultValue={1} min="1" />
+                      <input type="number" defaultValue={1} min="1" max={prod.quantity}/>
                     </div>
                     <div className="line_products_cart"></div>
-                    <button className="delete_btn_products_info">Delete</button>
+                    <button className="delete_btn_products_info" onClick={()=>deleteProductAddtoCart(prod._id)}>Delete</button>
                   </div>
                   <div className="end_section_products_info_cart">
-                    <Link to="/">See more details ...</Link>
+                    <Link to={`/singleproduct/${prod._id}/${prod.imageId}`}>See more details ...</Link>
                   </div>
                 </div>
               </div>
-  
-              <div className="line_cart"></div>
-              <div className="product_detail_section_cart">
-                <div className="left_product_detail_cart">
-                  <img src={Img1} alt="product" />
-                </div>
-                <div className="products_info_cart">
-                  <div className="top_products_info_cart">
-                    <h2>Nike | Summer T-Shirt</h2>
-                    <h3>&#8377; 1,800</h3>
-                  </div>
-                  <div className="middle_products_info_cart">
-                    <h3>Clothing</h3>
-                    <p>In Stock</p>
-                  </div>
-                  <div className="bottom_products_info_cart">
-                    <div className="input_products_info_cart">
-                      <label>Qty</label>
-                      <input type="number" defaultValue={1} min="1" />
-                    </div>
-                    <div className="line_products_cart"></div>
-                    <button className="delete_btn_products_info">Delete</button>
-                  </div>
-                  <div className="end_section_products_info_cart">
-                    <Link to="/">See more details ...</Link>
-                  </div>
-                </div>
-              </div>
+                ))
+               
+              }
             </div>
             <div className="bottom_detail_section_cart">
               <div className="line_cart"></div>
               <h3>
-                Subtotal (2 items) : <span>&#8377; 2,000</span>
+                Subtotal ({cart.length} items) : <span>&#8377; {price}</span>
               </h3>
               <div>
                   <button className="pay_btn_cart" onClick={() => setIsModal(!isModal)}>Proceed to Pay</button>

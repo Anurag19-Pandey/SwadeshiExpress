@@ -49,7 +49,7 @@ const Login = () => {
             navigate(`/sellerdashboard/${data.id}`)
           
         }else{
-          navigate('/')
+          navigate(`/`)
         }
        })
     }

@@ -4,8 +4,10 @@ const Seller = require('../Schemas/SellerSchema')
 const mongoose = require('mongoose')
 const twilio = require('twilio');
 var ObjectId = require('mongoose').ObjectID;
+const jwt  = require('jsonwebtoken')
 
 module.exports.getAllProducts = async(req,res)=>{
+
 
     const product = await Product.find({})
 
@@ -47,6 +49,81 @@ module.exports.categoryProduct = async(req,res)=>{
     }
 }
 
+
+module.exports.addtoCartProduct = async(req,res)=>{
+  try{
+
+    const id = req.id
+
+    const product = await Product.findOne({_id:req.params.pid})
+   
+    const updateAddtoCart = await Seller.findByIdAndUpdate({_id:id},{
+        $addToSet:{
+            "addtoCart":product
+        }
+    })
+
+    if(updateAddtoCart)
+    {
+        res.send("updated")
+    }
+    else{
+        res.send({message:"Some Error Occured"})
+    }
+    
+    // else{
+    //     res.send({message:"Error"})
+    // }
+   }catch(err){
+    console.log(err)
+   }
+
+}
+
+module.exports.getaddToCart = async(req,res)=>{
+    try{
+
+        const {id} = req.params
+
+        const seller = await Seller.findOne({_id:id})
+
+        if(seller){
+            res.send(seller.addtoCart)
+        }
+        else{
+            res.send({message:"Please Login"})
+        }
+
+    }catch(err){
+
+    }
+}
+
+module.exports.deleteaddtoProduct = async(req,res)=>{
+
+    try{
+        
+       const seller = await Seller.findOne({_id:req.params.id})
+
+       for(let i=0;i<seller.addtoCart.length;i++){
+          if(seller.addtoCart[i]._id == req.params.pid){
+            seller.addtoCart.splice(i,1);
+          }
+       }
+
+      await seller.save()
+      res.send(seller.addtoCart)
+              
+    }catch(err){ 
+
+        console.log(err)
+
+    }
+
+ 
+
+}
+
 module.exports.comment = async(req,res)=>{
     const {id} = req.params
     console.log(id);
@@ -83,6 +160,7 @@ module.exports.getcomments = async(req,res)=>{
 
 }
 
+
 module.exports.notifyseller=async(req,res)=>{
     const {id}=req.params
     const product = await Product.findById(id)
@@ -108,3 +186,4 @@ module.exports.notifyseller=async(req,res)=>{
         res.send("Product does'nt exist")
     }
 }
+

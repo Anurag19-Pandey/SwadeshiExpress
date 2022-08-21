@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/HomeHeaderStyles.css";
 import { FaTimes, FaBars } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import axios from 'axios'
+import { useCookies } from "react-cookie";
 
-const HomeHeader = () => {
+const HomeHeader = ({id,cartlength}) => {
   const navigate = useNavigate();
+const [lengthofCart,setLengthofCart] = useState("0");
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
+
+  useEffect(()=>{
+    const productInCart=()=>{
+     axios.get(`http://localhost:5000/product/getaddtocart/${id}`).then(({data})=>{
+      setLengthofCart(data.length)
+     })
+     }
+    productInCart()
+  },[])
 
   return (
     <div className="homeheader">
@@ -16,10 +28,14 @@ const HomeHeader = () => {
           <div>
           <Link to="/">Swadeshi Express</Link>
           </div>
+
+          <Link to={`/cart/${id}`}> 
           <div className="cart_container_homeheader">
-            <div className="cart_no_homeheader">1</div>
-            <AiOutlineShoppingCart className="cart_icon_homeheader" />
+            <div className="cart_no_homeheader">{cartlength != 0 ? cartlength:lengthofCart}</div>
+           <AiOutlineShoppingCart className="cart_icon_homeheader" />
           </div>
+          </Link>
+  
         </div>
       </div>
 
