@@ -170,8 +170,8 @@ module.exports.notifyseller=async(req,res)=>{
             const client = new twilio(process.env.Account_SID, process.env.Auth_Token);
             client.messages.create({
              body:"Your product is added to the Cart",
-             from:'+19207543624',
-             to:'+919354190836'
+             from:Process.env.Sender_Phone,
+             to:seller.phoneno
             }).then(message => console.log(message.sid)).done();
         
             res.send("Notified");
