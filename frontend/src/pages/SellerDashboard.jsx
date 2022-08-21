@@ -40,6 +40,7 @@ const SellerDashboard = () => {
               }else{
                 const {data} = await axios.get(`http://localhost:5000/seller/sellerdetails/${id}`)
                 setUserDetail(data)
+                console.log(data);
                 navigate(`/sellerdashboard/${id}`)
               }
             }
@@ -66,7 +67,7 @@ const SellerDashboard = () => {
         <Header/>
         <div className="Seller_info_Seller">
             <div className="Seller_info_image">
-                <img src="https://pbs.twimg.com/media/E2JJMJsVIAE9Aq4.jpg:large" alt="Selle" />
+                <img src="https://pbs.twimg.com/media/E2JJMJsVIAE9Aq4.jpg:large" alt="Seller" />
             </div>
             <div className="Seller_info">
                 <div className="Seller_info_name">

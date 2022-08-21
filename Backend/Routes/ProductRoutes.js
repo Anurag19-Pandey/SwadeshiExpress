@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Grid = require('gridfs-stream')
 const router = express.Router()
 const Product = require('../Schemas/ProductSchema')
-const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct,comment,getcomments} = require("../Controllers/ProductController")
+const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct,comment,getcomments,notifyseller} = require("../Controllers/ProductController")
 
 const upload = require('../Middleware/Upload')
 
@@ -129,6 +129,8 @@ router.route('/:type').get(categoryProduct)
 router.route('/postcomment/:id').post(comment)
 
 router.route('/getcomments/:id').get(getcomments)
+
+router.route('/notify/:id').get(notifyseller)
 
 module.exports = router
 

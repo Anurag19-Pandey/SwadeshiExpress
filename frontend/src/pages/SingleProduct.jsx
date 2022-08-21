@@ -17,6 +17,7 @@ const SingleProduct = () => {
 	useEffect(() => {
 		axios.get(`http://localhost:5000/product/getproduct/${id}`).then(({ data }) => {
 			setProduct(data)
+			console.log(data);
 		})
 	}, [])
 
@@ -25,6 +26,10 @@ const SingleProduct = () => {
 			setComments(data)
 		})
 	},[])
+
+	const addtocart=()=>{
+        alert("Product added to cart ")
+	}
 
 	const postcomment = (e) => {
 		console.log(review);
@@ -77,7 +82,7 @@ const SingleProduct = () => {
 					</select>
 					<div className='details_cart_singleproduct'>
 						<input type="number" defaultValue={1} min="1" max={product.quantity} />
-						<button>Add To Cart <AiOutlineShoppingCart size={16} /></button>
+						<button onClick={addtocart}>Add To Cart <AiOutlineShoppingCart size={16} /></button>
 					</div>
 					<h4>Product Details</h4>
 					<br></br>
