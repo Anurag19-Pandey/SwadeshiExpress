@@ -14,6 +14,12 @@ const SingleProduct = () => {
 	const [product, setProduct] = useState({})
 	const { id, imageid } = useParams()
 
+	const notifys=(id)=>{
+      axios.get(`http://localhost:5000/product/notify/${id}`).then(({data})=>{
+		console.log(data)
+	  })
+	}
+
 	useEffect(() => {
 		axios.get(`http://localhost:5000/product/getproduct/${id}`).then(({ data }) => {
 			setProduct(data)
@@ -90,7 +96,9 @@ const SingleProduct = () => {
 					</select>
 					<div className='details_cart_singleproduct'>
 						<input type="number" defaultValue={1} min="1" max={product.quantity} />
-						<button onClick={() => addToCart(product._id)}>Add To Cart <AiOutlineShoppingCart size={16} /></button>
+						<button onClick={() => {addToCart(product._id)
+						notifys(product._id);
+						}}>Add To Cart <AiOutlineShoppingCart size={16} /></button>
 					</div>
 					return (
 					<div>
