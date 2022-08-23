@@ -3,14 +3,12 @@ const mongoose = require("mongoose");
 const Grid = require('gridfs-stream')
 const router = express.Router()
 const Product = require('../Schemas/ProductSchema')
-<<<<<<< HEAD
 const Seller = require('../Schemas/SellerSchema')
+
 const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct,addtoCartProduct,getaddToCart,deleteaddtoProduct} = require("../Controllers/ProductController")
 
 const {CheckSeller} = require("../Middleware/AuthMiddleware")
-=======
-const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct,comment,getcomments} = require("../Controllers/ProductController")
->>>>>>> 8032c07fb0f0325331c8c8fe02829548dd47a0fa
+
 
 const upload = require('../Middleware/Upload')
 

@@ -47,8 +47,6 @@ module.exports.categoryProduct = async(req,res)=>{
     }
 }
 
-<<<<<<< HEAD
-
 module.exports.addtoCartProduct = async(req,res)=>{
   try{
 
@@ -119,10 +117,8 @@ module.exports.deleteaddtoProduct = async(req,res)=>{
 
     }
 
- 
-
 }
-=======
+
 module.exports.comment = async(req,res)=>{
     const {id} = req.params
     console.log(id);
@@ -158,4 +154,4 @@ module.exports.getcomments = async(req,res)=>{
     }
 
 }
->>>>>>> 8032c07fb0f0325331c8c8fe02829548dd47a0fa
+
