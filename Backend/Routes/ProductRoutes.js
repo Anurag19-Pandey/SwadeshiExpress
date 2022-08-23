@@ -5,7 +5,7 @@ const router = express.Router()
 const Product = require('../Schemas/ProductSchema')
 const Seller = require('../Schemas/SellerSchema')
 
-const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct,addtoCartProduct,getaddToCart,deleteaddtoProduct} = require("../Controllers/ProductController")
+const {getAllProducts, deleteProduct,editProduct,singleProduct,categoryProduct,addtoCartProduct,getaddToCart,deleteaddtoProduct,comment,getcomments} = require("../Controllers/ProductController")
 
 const {CheckSeller} = require("../Middleware/AuthMiddleware")
 
