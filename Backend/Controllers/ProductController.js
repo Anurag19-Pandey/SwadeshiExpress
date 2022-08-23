@@ -2,6 +2,8 @@ const Product = require("../Schemas/ProductSchema")
 const {ProductError} = require("../ErrorHandling/ProductError")
 const Seller = require('../Schemas/SellerSchema')
 const mongoose = require('mongoose')
+const twilio = require('twilio');
+var ObjectId = require('mongoose').ObjectID;
 const jwt  = require('jsonwebtoken')
 
 module.exports.getAllProducts = async(req,res)=>{
@@ -153,5 +155,31 @@ module.exports.getcomments = async(req,res)=>{
         res.send("Product does'nt exist")
     }
 
+}
+
+module.exports.notifyseller=async(req,res)=>{
+    const {id}=req.params
+    const product = await Product.findById(id)
+    console.log(product);
+    if(product){
+        if(seller){
+            const client = new twilio(process.env.Account_SID, process.env.Auth_Token);
+            client.messages.create({
+             body:"Your product is added to the Cart",
+             from:Process.env.Sender_Phone,
+             to:seller.phoneno
+            }).then(message => console.log(message.sid)).done();
+        
+            res.send("Notified");
+            const seller = await Seller.findById(product.id)
+            console.log(seller);
+        }
+        else{
+            res.send("Seller does'nt exist")
+        }
+    }
+    else{
+        res.send("Product does'nt exist")
+    }
 }
 

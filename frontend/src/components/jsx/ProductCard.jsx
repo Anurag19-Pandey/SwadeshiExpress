@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import P1 from "../../images/products/f1.jpg";
+import P1 from "../../images/products/f1.jpg";
 import "../css/ProductCardStyles.css";
 import { AiFillStar, AiOutlineShoppingCart } from "react-icons/ai"
 
@@ -7,7 +7,8 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = () => {
- 
+
+
   const [product,setProduct] = useState([])
 
   const navigate = useNavigate()
@@ -25,12 +26,13 @@ const ProductCard = () => {
       axios.get(`http://localhost:5000/product/getallproducts`).then(({data})=>{
 
         setProduct(data)
+       
       })
     }
     getproduct()
 
   }, [addToCart])
-
+     
   return (
   <div className="product_details">
     {
@@ -55,11 +57,10 @@ const ProductCard = () => {
          </div>
         </div>
           )) 
-        }
+      }
         </div>
 
   );
-};
 
-
+}
 export default ProductCard;

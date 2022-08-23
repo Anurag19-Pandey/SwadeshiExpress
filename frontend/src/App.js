@@ -27,18 +27,11 @@ const App = () => {
         <Route path="/otpverify/:email" element={<OtpVerify />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/signupseller" element={<SignUpSeller />} />
-<<<<<<< HEAD
         <Route path="/sellerdashboard" element={<SellerDashboard/>}/>
         <Route path="/products" element={<Products />} />
-=======
         <Route path="/sellerdashboard/:id" element={<SellerDashboard/>}/>
         <Route path="/products" element={<Products />} />
-<<<<<<< HEAD
         <Route path="/cart/:id" element={<Cart />} />
-=======
-        <Route path="/cart" element={<Cart />} />
->>>>>>> 371822eb504570949831838139c0570e1b41e5a9
->>>>>>> 8032c07fb0f0325331c8c8fe02829548dd47a0fa
       </Routes>
     </BrowserRouter>
   );
